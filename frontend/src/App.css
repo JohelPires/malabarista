@@ -1,0 +1,19 @@
+.App {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    background: rgb(24, 179, 97);
+    background: linear-gradient(225deg, rgba(24, 179, 97, 1) 0%, rgba(5, 91, 142, 1) 100%);
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.round {
+    border-radius: 12px;
+}
+
+.main-shadow {
+    box-shadow: -5px 5px 40px rgba(0, 0, 0, 0.507);
+}
