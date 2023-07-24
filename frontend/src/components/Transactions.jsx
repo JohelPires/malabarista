@@ -1,22 +1,24 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container, Stack } from 'react-bootstrap'
+import testData from '../data/testData'
+import TransItem from './TransItem'
 
 function Transactions() {
+    const [data, setData] = useState(testData.transactions)
+
+    console.log(data[0])
+
     return (
         <Container className='bg-white round main-shadow'>
-            <h3>Transactions</h3>
-            <h3>Title</h3>
-            <p>item 1</p>
-            <p>item 2</p>
-            <p>item 3</p>
-            <p>item 4</p>
-            <p>item 5</p>
-            <h3>Title</h3>
-            <p>item 1</p>
-            <p>item 2</p>
-            <p>item 3</p>
-            <p>item 4</p>
-            <p>item 5</p>
+            <Stack className='p-3'>
+                <div className='transaction_month'>
+                    <h3>Julho</h3>
+                </div>
+
+                {data.map((item) => {
+                    return <TransItem item={item} />
+                })}
+            </Stack>
         </Container>
     )
 }

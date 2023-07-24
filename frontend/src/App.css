@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
+:root {
+    --main-green: #00ba5d;
+    --main-orange: #eb7a12;
+}
+
 .App {
     display: flex;
     min-height: 100vh;
     width: 100vw;
     background: rgb(24, 179, 97);
     background: linear-gradient(225deg, rgba(24, 179, 97, 1) 0%, rgba(5, 91, 142, 1) 100%);
+    font-family: 'Cantarell', sans-serif;
+    color: white;
 }
 
 .bg-white {
     background-color: white;
+    color: #5b5b5b;
+    min-height: 200px;
+    margin-bottom: 20px;
 }
 
 .round {
@@ -16,4 +28,24 @@
 
 .main-shadow {
     box-shadow: -5px 5px 40px rgba(0, 0, 0, 0.507);
+}
+
+.transaction_month {
+    /* margin: 10px;
+    padding-top: 10px; */
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.controlBar {
+    background: rgb(4, 64, 98);
+    background: linear-gradient(135deg, rgba(4, 64, 98, 1) 0%, rgba(1, 40, 62, 1) 100%);
+}
+
+.bt-receita {
+    background-color: var(--main-green);
 }
