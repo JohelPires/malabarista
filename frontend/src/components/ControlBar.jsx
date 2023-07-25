@@ -10,25 +10,36 @@ function ControlBar() {
     }
 
     return (
-        <Container className='controlBar p-3 mb-4 round main-shadow'>
-            <Stack direction='horizontal' gap={3}>
-                <Button variant='success' size='sm'>
-                    Receita
-                </Button>
-                <h3>R$</h3>
+        <Stack className='controlBar p-3 mb-4 round main-shadow'>
+            <Stack direction='horizontal' gap={2}>
+                <h3 style={{ fontSize: '1.1rem' }} className='m-0'>
+                    R$
+                </h3>
                 <Form.Control
                     size='sm'
                     value={valor}
                     onChange={handleChange}
                     type='text'
-                    style={{ width: '100px' }}
+                    className='transaction-input'
                 ></Form.Control>
                 <Button variant='success' size='sm'>
                     Despesa
                 </Button>
+                <Button variant='success' size='sm'>
+                    Receita
+                </Button>
                 <h3 className='ms-auto'>Saldo: R$ 4.125,00</h3>
             </Stack>
-        </Container>
+            <Stack direction='horizontal' gap={2}>
+                <Form.Select size='sm' aria-label='Default select example'>
+                    <option>Categoria</option>
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                </Form.Select>
+                <Button size='sm'>Confirmar</Button>
+            </Stack>
+        </Stack>
     )
 }
 

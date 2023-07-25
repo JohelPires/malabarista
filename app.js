@@ -6,6 +6,13 @@ const rotasCategoria = require('./src/Routes/rotasCategoria')
 const rotasTrans = require('./src/Routes/rotasTrans')
 const app = express()
 
+const cors = require('cors')
+app.use(
+    cors({
+        origin: '*',
+    })
+)
+
 app.use(express.json())
 app.use('/usuario', rotasUsuario)
 app.use('/categoria', rotasCategoria)

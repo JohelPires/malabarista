@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 :root {
     --main-green: #00ba5d;
     --main-orange: #eb7a12;
@@ -11,8 +16,18 @@
     width: 100vw;
     background: rgb(24, 179, 97);
     background: linear-gradient(225deg, rgba(24, 179, 97, 1) 0%, rgba(5, 91, 142, 1) 100%);
+    background-attachment: fixed;
     font-family: 'Cantarell', sans-serif;
     color: white;
+}
+
+.transaction-input {
+    width: 100px;
+    background-color: rgba(34, 34, 34, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: bold;
 }
 
 .bg-white {
