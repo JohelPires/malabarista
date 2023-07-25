@@ -23,7 +23,7 @@ function ControlBar() {
                     type='text'
                     style={{ width: '100px' }}
                 ></Form.Control>
-                <Button variant='danger' size='sm'>
+                <Button variant='success' size='sm'>
                     Despesa
                 </Button>
                 <h3 className='ms-auto'>Saldo: R$ 4.125,00</h3>

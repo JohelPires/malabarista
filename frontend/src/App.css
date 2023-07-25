@@ -49,3 +49,7 @@ h3 {
 .bt-receita {
     background-color: var(--main-green);
 }
+
+.donut {
+    padding: 0px 50px;
+}

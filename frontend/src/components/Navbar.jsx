@@ -1,14 +1,17 @@
 import React from 'react'
-import { Container, Stack } from 'react-bootstrap'
+import { Button, Container, Stack } from 'react-bootstrap'
 
 function Navbar() {
     return (
-        <Container>
-            <Stack gap={2} direction='horizontal'>
+        <Container className='pt-3 pb-3'>
+            <Stack gap={3} direction='horizontal'>
                 <h2>Malabaris</h2>
-                <p className='ms-auto'>Início</p>
-                <p>Outra tela</p>
-                <div>Login</div>
+                <h6 className='ms-auto'>Início</h6>
+                <h6>Outra tela</h6>
+                {/* <div className='vr'></div> */}
+                <Button size='sm' variant='success'>
+                    Login
+                </Button>
             </Stack>
         </Container>
     )
