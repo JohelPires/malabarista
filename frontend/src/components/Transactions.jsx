@@ -7,12 +7,13 @@ import axios from 'axios'
 function Transactions({ isAuth, reload }) {
     // const [data, setData] = useState(testData.transactions)
     const [data, setData] = useState([])
+    const [mes, setMes] = useState('')
 
     useEffect(() => {
         axios
             .get('http://localhost:5000/trans', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
             .then((data) => {
-                console.log(data.data)
+                console.log(data.data[10])
                 setData(data.data)
             })
             .catch((err) => console.log(err))
