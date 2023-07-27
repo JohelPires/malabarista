@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Stack } from 'react-bootstrap'
 import testData from '../data/testData'
 import TransItem from './TransItem'
+import axios from 'axios'
 
-function Transactions() {
-    const [data, setData] = useState(testData.transactions)
+function Transactions({ isAuth, reload }) {
+    // const [data, setData] = useState(testData.transactions)
+    const [data, setData] = useState([])
 
-    console.log(data[0])
+    useEffect(() => {
+        axios
+            .get('http://localhost:5000/trans', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
+            .then((data) => {
+                console.log(data.data)
+                setData(data.data)
+            })
+            .catch((err) => console.log(err))
+    }, [reload])
 
     return (
         <Container className='bg-white round main-shadow'>

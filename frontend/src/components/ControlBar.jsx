@@ -1,9 +1,11 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap'
 
-function ControlBar() {
+function ControlBar({ isAuth, setReload }) {
     const [valor, setValor] = useState(0.0)
-    const [categ, setCateg] = useState(false)
+    const [showCateg, setShowCateg] = useState(false)
+    const [categ, setCateg] = useState(0)
 
     const [despesas, setDespesas] = useState([
         'Alimentação', // (restaurantes, supermercado, delivery)', //
@@ -38,16 +40,33 @@ function ControlBar() {
 
     function handleChange(e) {
         console.log(e.target.value)
-        setValor(e.target.value)
+        setValor(parseFloat(e.target.value))
     }
 
     function handleDespesa() {
-        setCateg(true)
+        console.log(despesas[categ - 1])
+        setValor((prev) => prev * -1)
+        setShowCateg('DESPESA')
+    }
+    function handleReceita() {
+        console.log(receitas[categ - 1000])
+        setShowCateg('RECEITA')
     }
 
     function handleConfirma() {
+        console.log(valor)
+        axios
+            .post(
+                'http://localhost:5000/trans',
+                { valor: valor, id_categoria: categ },
+                { headers: { Authorization: `Bearer ${isAuth.accessToken}` } }
+            )
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err))
         console.log(categ)
-        setCateg(false)
+        setValor(0)
+        setReload((prev) => !prev)
+        setShowCateg(false)
     }
 
     return (
@@ -66,25 +85,33 @@ function ControlBar() {
                 <Button variant='success' size='sm' onClick={handleDespesa}>
                     Despesa
                 </Button>
-                <Button variant='success' size='sm'>
+                <Button variant='success' size='sm' onClick={handleReceita}>
                     Receita
                 </Button>
                 <h3 className='ms-auto'>Saldo: R$ 4.125,00</h3>
             </Stack>
-            {categ && (
+            {showCateg && (
                 <Container>
                     <Row>
                         <Col md={5} className='mt-2'>
                             <Stack direction='horizontal' gap={2}>
                                 <Form.Select
-                                    onChange={(e) => setCateg(e.target.value)}
+                                    onChange={(e) => {
+                                        showCateg == 'DESPESA'
+                                            ? setCateg(parseInt(e.target.value) + 1)
+                                            : setCateg(parseInt(e.target.value) + 1000)
+                                    }}
                                     size='sm'
                                     aria-label='Default select example'
                                 >
                                     <option>Selecione a categoria</option>
-                                    {despesas.map((d, i) => {
-                                        return <option value={i}>{d}</option>
-                                    })}
+                                    {showCateg == 'DESPESA'
+                                        ? despesas.map((d, i) => {
+                                              return <option value={i}>{d}</option>
+                                          })
+                                        : receitas.map((d, i) => {
+                                              return <option value={i}>{d}</option>
+                                          })}
                                 </Form.Select>
                                 <Button onClick={handleConfirma} size='sm'>
                                     Confirmar

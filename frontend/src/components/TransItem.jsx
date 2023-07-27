@@ -14,12 +14,12 @@ function TransItem({ item }) {
     }
     return (
         <Stack className='mb-3' direction='horizontal' gap={2}>
-            <div className='m-0' style={item.value > 0 ? receita : despesa}></div>
+            <div className='m-0' style={item.valor > 0 ? receita : despesa}></div>
             <h6 style={{ fontWeight: 'bold' }} className='m-0'>
-                R${showItemValue(item.value).toFixed(2)}
+                R${showItemValue(item.valor).toFixed(2)}
             </h6>
             <h6 style={{ fontWeight: 'bold' }} className='m-0 ms-auto'>
-                {item.category}
+                {item.id_categoria}
             </h6>
         </Stack>
     )

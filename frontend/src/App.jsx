@@ -13,17 +13,21 @@ import Registrar from './telas/Registrar'
 
 function App() {
     const [isAuth, setIsAuth] = useState('')
+    const [reload, setReload] = useState(false)
     return (
         <div className='App'>
             <Container fluid='sm'>
                 <Row>
                     <Col>
                         <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
-                        {isAuth && <ControlBar />}
+                        {isAuth && <ControlBar isAuth={isAuth} setReload={setReload} />}
                     </Col>
                 </Row>
                 <Routes>
-                    <Route path='/' element={isAuth ? <Main isAuth={isAuth} /> : <Navigate to={'/login'} />} />
+                    <Route
+                        path='/'
+                        element={isAuth ? <Main isAuth={isAuth} reload={reload} /> : <Navigate to={'/login'} />}
+                    />
                     <Route path='login' element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />
                     <Route path='registrar' element={<Registrar isAuth={isAuth} setIsAuth={setIsAuth} />} />
                 </Routes>

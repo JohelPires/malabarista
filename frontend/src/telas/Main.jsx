@@ -4,11 +4,11 @@ import Transactions from '../components/Transactions'
 import BarStats from '../components/BarStats'
 import Categories from '../components/Categories'
 
-function Main() {
+function Main({ isAuth, reload }) {
     return (
         <Row>
             <Col md={5}>
-                <Transactions />
+                <Transactions isAuth={isAuth} reload={reload} />
             </Col>
             <Col md={7}>
                 <BarStats />
