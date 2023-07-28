@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Stack } from 'react-bootstrap'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
@@ -21,31 +21,58 @@ const options = {
 
 const labels = meses
 
-const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Despesas',
-            data: [100, 300, 500, 300, 900, 350, 600],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Receitas',
-            data: [100, 300, 500, 300, 900, 350, 600],
-            backgroundColor: [
-                'rgba(53, 162, 235, 0.3)',
-                'rgba(53, 162, 235, 0.4)',
-                'rgba(53, 162, 235, 0.5)',
-                'rgba(53, 162, 235, 0.6)',
-                'rgba(53, 162, 235, 0.7)',
-                'rgba(53, 162, 235, 0.8)',
-                'rgba(53, 162, 235, 0.9)',
-            ],
-        },
-    ],
-}
+function BarStats({ dados }) {
+    const [mesesReceita, setMesesReceita] = useState([])
+    const [mesesDespesa, setMesesDespesa] = useState([])
 
-function BarStats() {
+    useEffect(() => {
+        let dadosMes
+        const anoReceita = []
+        const anoDespesa = []
+        for (let i = 0; i < 12; i++) {
+            dadosMes = dados.filter((item) => parseInt(item.createdAt.slice(5, 7)) === i + 1)
+            let somaReceita = 0
+            let somaDespesa = 0
+
+            dadosMes.map((item) => {
+                if (item.valor > 0) {
+                    somaReceita += item.valor
+                } else {
+                    somaDespesa += item.valor * -1
+                }
+            })
+            anoReceita.push(somaReceita)
+            anoDespesa.push(somaDespesa)
+            // console.log(anoReceita, anoDespesa)
+        }
+
+        setMesesReceita(anoReceita)
+        setMesesDespesa(anoDespesa)
+    }, [dados])
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Despesas',
+                data: mesesDespesa,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+            {
+                label: 'Receitas',
+                data: mesesReceita,
+                backgroundColor: [
+                    'rgba(53, 162, 235, 0.3)',
+                    'rgba(53, 162, 235, 0.4)',
+                    'rgba(53, 162, 235, 0.5)',
+                    'rgba(53, 162, 235, 0.6)',
+                    'rgba(53, 162, 235, 0.7)',
+                    'rgba(53, 162, 235, 0.8)',
+                    'rgba(53, 162, 235, 0.9)',
+                ],
+            },
+        ],
+    }
     return (
         <Container className='bg-white round main-shadow'>
             <Stack className='p-3'>
