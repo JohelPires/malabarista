@@ -6,14 +6,33 @@ import axios from 'axios'
 
 function Transactions({ isAuth, reload }) {
     // const [data, setData] = useState(testData.transactions)
+    const mesAtual = new Date().getMonth() + 1
     const [data, setData] = useState([])
-    const [mes, setMes] = useState('')
+    const [dadosMes, setDadosMes] = useState([])
+
+    const meses = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro',
+    ]
+
+    const [mes, setMes] = useState(meses[mesAtual - 1])
 
     useEffect(() => {
         axios
             .get('http://localhost:5000/trans', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
             .then((data) => {
-                console.log(data.data[10])
+                // setMes(meses[parseInt(data.data[data.data.length - 1].createdAt.slice(5, 7)) - 1])
+                setDadosMes(data.data.filter((item) => parseInt(item.createdAt.slice(5, 7)) === mesAtual))
                 setData(data.data)
             })
             .catch((err) => console.log(err))
@@ -23,10 +42,10 @@ function Transactions({ isAuth, reload }) {
         <Container className='bg-white round main-shadow'>
             <Stack className='p-3'>
                 <div className='transaction_month'>
-                    <h3>Julho</h3>
+                    <h3>{mes}</h3>
                 </div>
 
-                {data.map((item) => {
+                {dadosMes.map((item) => {
                     return <TransItem item={item} />
                 })}
             </Stack>
