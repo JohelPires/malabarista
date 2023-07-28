@@ -5,10 +5,10 @@ import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
 
-function Transactions({ isAuth, reload, setData }) {
+function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes }) {
     // const [data, setData] = useState(testData.transactions)
     const [mesAtual, setMesAtual] = useState(new Date().getMonth() + 1)
-    const [dadosMes, setDadosMes] = useState([])
+
     const [mes, setMes] = useState('')
 
     useEffect(() => {

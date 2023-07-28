@@ -6,14 +6,21 @@ import Categories from '../components/Categories'
 
 function Main({ isAuth, reload }) {
     const [data, setData] = useState([])
+    const [dadosMes, setDadosMes] = useState([])
     return (
         <Row>
             <Col md={5}>
-                <Transactions setData={setData} isAuth={isAuth} reload={reload} />
+                <Transactions
+                    setData={setData}
+                    dadosMes={dadosMes}
+                    setDadosMes={setDadosMes}
+                    isAuth={isAuth}
+                    reload={reload}
+                />
             </Col>
             <Col md={7}>
                 <BarStats dados={data} />
-                <Categories />
+                <Categories dados={data} dadosMes={dadosMes} />
             </Col>
         </Row>
     )
