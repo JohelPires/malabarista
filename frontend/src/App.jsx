@@ -13,7 +13,7 @@ import Registrar from './telas/Registrar'
 
 function App() {
     const [isAuth, setIsAuth] = useState('')
-    const [reload, setReload] = useState(false)
+    const [reload, setReload] = useState(0)
     return (
         <div className='App'>
             <Container fluid='sm'>

@@ -35,7 +35,7 @@ function ControlBar({ isAuth, setReload }) {
             .catch((err) => console.log(err))
         console.log(categ)
         setValor(0)
-        setReload((prev) => !prev)
+        setReload((prev) => prev + 1)
         setShowCateg(false)
     }
 
