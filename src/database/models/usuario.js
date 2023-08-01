@@ -22,6 +22,11 @@ const Usuario = sequelize.define(
         senha: {
             type: DataTypes.STRING,
         },
+        saldo: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+            defaultValue: 0,
+        },
     },
     { freezeTableName: true }
 )

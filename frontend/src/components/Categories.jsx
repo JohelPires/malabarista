@@ -24,9 +24,11 @@ function Categories({ dadosMes }) {
         // Create an object to store the sums for each category
         const somaPorCategoria = {}
 
+        console.log(despesasMes)
+
         // Iterate through the array and calculate the sums for each category
         despesasMes.forEach((object) => {
-            const categoryId = object.id_categoria
+            const categoryId = object.id_categoria - 1
             const value = object.valor
 
             // If the category already exists in the somaPorCategoria object, add the value to the existing sum
@@ -38,7 +40,7 @@ function Categories({ dadosMes }) {
             }
         })
 
-        console.log(somaPorCategoria)
+        console.log('soma por categoria: ', somaPorCategoria)
         setDadosCategoria(Object.values(somaPorCategoria))
         const keys = Object.keys(somaPorCategoria)
         keys.map((key, i) => {

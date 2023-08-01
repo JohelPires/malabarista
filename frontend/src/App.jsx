@@ -20,7 +20,7 @@ function App() {
                 <Row>
                     <Col>
                         <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
-                        {isAuth && <ControlBar isAuth={isAuth} setReload={setReload} />}
+                        {isAuth && <ControlBar isAuth={isAuth} reload={reload} setReload={setReload} />}
                     </Col>
                 </Row>
                 <Routes>

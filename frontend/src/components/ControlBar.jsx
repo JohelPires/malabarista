@@ -1,12 +1,19 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
 
-function ControlBar({ isAuth, setReload }) {
+function ControlBar({ isAuth, reload, setReload }) {
     const [valor, setValor] = useState(0.0)
     const [showCateg, setShowCateg] = useState(false)
     const [categ, setCateg] = useState(0)
+    const [saldo, setSaldo] = useState(0)
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
+            setSaldo(data.data.saldo)
+        })
+    }, [reload, showCateg])
 
     function handleChange(e) {
         console.log(e.target.value)
@@ -58,7 +65,7 @@ function ControlBar({ isAuth, setReload }) {
                 <Button variant='success' size='sm' onClick={handleReceita}>
                     Receita
                 </Button>
-                <h3 className='ms-auto'>Saldo: R$ 4.125,00</h3>
+                <h3 className='ms-auto'>Saldo: R$ {saldo}</h3>
             </Stack>
             {showCateg && (
                 <Container>

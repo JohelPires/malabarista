@@ -114,4 +114,31 @@ function deleta(req, res) {
         })
 }
 
-module.exports = { listAll, addUsuario, findId, update, deleta, login }
+function updateSaldo(id, valor) {
+    let saldo
+    Usuario.findByPk(id)
+        .then((result) => {
+            saldo = result.dataValues.saldo
+            saldo = saldo + parseFloat(valor)
+            Usuario.update(
+                { saldo: saldo },
+                {
+                    where: {
+                        id: parseInt(id),
+                    },
+                }
+            )
+                .then((result) => {
+                    console.log('==== SALDO ATUALIZADO ====')
+                    console.log(result)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+module.exports = { listAll, addUsuario, findId, update, deleta, login, updateSaldo }

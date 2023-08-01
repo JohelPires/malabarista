@@ -3,6 +3,7 @@
 
 // const Usuario = require('../database/models/usuario') //(sequelize, DataTypes)
 const Transacao = require('../database/models/transacao') //(sequelize, DataTypes)
+const { updateSaldo } = require('./UsuarioController')
 
 function listAll(req, res) {
     console.log(typeof Transacao)
@@ -22,6 +23,7 @@ function listAll(req, res) {
 function add(req, res) {
     const { valor, descricao, id_conta, frequencia, periodica, id_categoria } = req.body
     const id_usuario = req.userId
+    updateSaldo(id_usuario, valor)
     Transacao.create({ id_usuario, valor, descricao, id_conta, frequencia, periodica, id_categoria })
         .then((result) => {
             res.status(200).json(result)
