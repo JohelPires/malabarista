@@ -3,6 +3,7 @@ import { Container, Stack } from 'react-bootstrap'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { despesas } from '../data/categorias'
+import meses from '../data/meses'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -15,7 +16,7 @@ const options = {
     },
 }
 
-function Categories({ dadosMes }) {
+function Categories({ dadosMes, mesAtual }) {
     const [dadosCategoria, setDadosCategoria] = useState([])
     const [labelsCategoria, setLabelsCategoria] = useState([])
     useEffect(() => {
@@ -82,7 +83,7 @@ function Categories({ dadosMes }) {
         <Container className='bg-white round main-shadow'>
             <Stack className='p-3'>
                 <div className='transaction_month'>
-                    <h3>Categorias</h3>
+                    <h3>Despesas por categoria - {meses[mesAtual - 1]}</h3>
                 </div>
                 <div className='donut'>
                     {dadosMes.length > 0 ? <Doughnut data={data} options={options} /> : 'Sem dados.'}

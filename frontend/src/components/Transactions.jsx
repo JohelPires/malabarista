@@ -5,9 +5,9 @@ import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
 
-function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes }) {
+function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
     // const [data, setData] = useState(testData.transactions)
-    const [mesAtual, setMesAtual] = useState(new Date().getMonth() + 1)
+    // const [mesAtual, setMesAtual] = useState(new Date().getMonth() + 1)
     const [mes, setMes] = useState('')
     const [loading, setLoading] = useState(true)
 
@@ -16,6 +16,7 @@ function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes }) {
     }, [mesAtual])
 
     useEffect(() => {
+        setLoading(true)
         axios
             .get('http://localhost:5000/trans', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
             .then((data) => {
