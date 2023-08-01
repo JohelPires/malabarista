@@ -56,7 +56,7 @@ function BarStats({ dados }) {
             {
                 label: 'Despesas',
                 data: mesesDespesa,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: '#F2CB70',
             },
             {
                 label: 'Receitas',
