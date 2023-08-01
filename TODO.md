@@ -5,6 +5,8 @@
 -   [ ] Mostrar data na lista (frontend)
 -   [ ] Permitir editar e excluir transações.
 -   [ ] Update the documentation to include the new API endpoints.
+-   [ ] melhorar responsividade
+-   [ ] função para mostrar números em formato monetário.
 
 ## Long-term Ideas
 
