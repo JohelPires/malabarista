@@ -12,6 +12,8 @@ function ControlBar({ isAuth, reload, setReload }) {
     const [saldo, setSaldo] = useState(0)
     const [modalShow, setModalShow] = useState(false)
 
+    const [tipo, setTipo] = useState('')
+
     useEffect(() => {
         axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
             setSaldo(data.data.saldo)
@@ -50,9 +52,9 @@ function ControlBar({ isAuth, reload, setReload }) {
     }
 
     return (
-        <Stack className='controlBar p-3 mb-4 round main-shadow'>
+        <Stack className='controlBar p-3 pt-2 pb-2 mb-4 round main-shadow'>
             <Stack direction='horizontal' gap={2}>
-                <h3 style={{ fontSize: '1.1rem' }} className='m-0'>
+                {/* <h3 style={{ fontSize: '1.1rem' }} className='m-0'>
                     R$
                 </h3>
                 <Form.Control
@@ -67,18 +69,37 @@ function ControlBar({ isAuth, reload, setReload }) {
                 </Button>
                 <Button variant='success' size='sm' onClick={handleReceita}>
                     Receita
+                </Button> */}
+                <Button
+                    variant='primary'
+                    size='sm'
+                    onClick={() => {
+                        setTipo('Receita')
+                        setModalShow(true)
+                    }}
+                >
+                    Adicionar receita
                 </Button>
-                <Button variant='success' size='sm' onClick={() => setModalShow(true)}>
-                    Receita modal
+                <Button
+                    variant='warning'
+                    // style={{ color: 'white' }}
+                    size='sm'
+                    onClick={() => {
+                        setTipo('Despesa')
+                        setModalShow(true)
+                    }}
+                >
+                    Adicionar despesa
                 </Button>
-                <h3 className='ms-auto'>Saldo: R$ {money(saldo)}</h3>
+                <h5 className='ms-auto m-0'>Saldo: R$ {money(saldo)}</h5>
             </Stack>
 
             <AddModal
                 setReload={setReload}
+                setSaldo={setSaldo}
                 isAuth={isAuth}
                 show={modalShow}
-                tipo={'Receita'}
+                tipo={tipo}
                 onHide={() => setModalShow(false)}
             />
 

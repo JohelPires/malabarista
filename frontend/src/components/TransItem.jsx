@@ -1,6 +1,7 @@
 import React from 'react'
 import { Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
+import { money } from '../util/money'
 
 function TransItem({ item }) {
     const receita = { height: '14px', width: '7px', backgroundColor: 'green' }
@@ -16,7 +17,7 @@ function TransItem({ item }) {
 
     function categoria(idcat) {
         if (idcat < 1000) {
-            return cat.despesas[idcat - 1]
+            return cat.despesas[idcat]
         } else {
             return cat.receitas[idcat - 1000]
         }
@@ -24,9 +25,9 @@ function TransItem({ item }) {
 
     return (
         <Stack className='mb-3' direction='horizontal' gap={2}>
-            <div className='m-0' style={item.valor > 0 ? receita : despesa}></div>
+            <div className='m-0' style={item.id_categoria < 1000 ? despesa : receita}></div>
             <h6 style={{ fontWeight: 'bold' }} className='m-0'>
-                R${showItemValue(item.valor).toFixed(2)}
+                R${money(showItemValue(item.valor))}
             </h6>
             <h6 style={{ fontWeight: 'bold' }} className='m-0 ms-auto'>
                 {categoria(item.id_categoria)}

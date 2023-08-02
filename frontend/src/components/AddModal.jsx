@@ -21,6 +21,7 @@ function AddModal(props) {
     }
 
     function handleAdd() {
+        setValor((prev) => (props.tipo === 'Receita' ? prev : prev * -1))
         console.log({
             valor: valor,
             data: date,
@@ -44,8 +45,10 @@ function AddModal(props) {
                 setCategoria(props.tipo === 'Receita' ? 1000 : 0)
                 setDate(new Date().toISOString().substring(0, 10))
                 setDescricao('')
-                setValor(null)
-                props.setReload((prev) => prev + 1)
+                setValor(0)
+                axios.get(`http://localhost:5000/usuario/${props.isAuth.usuario.id}`).then((data) => {
+                    props.setSaldo(data.data.saldo)
+                })
                 props.onHide()
             })
             .catch((err) => console.log(err))
@@ -66,7 +69,6 @@ function AddModal(props) {
                             type='number'
                             aria-label='Username'
                             aria-describedby='basic-addon1'
-                            isInvalid={validated && valor.length > 0 && (isNaN(Number(valor)) || Number(valor) === 0)}
                         />
                     </InputGroup>
                     <InputGroup className='mb-3'>

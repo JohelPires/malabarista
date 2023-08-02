@@ -29,7 +29,7 @@ function Categories({ dadosMes, mesAtual }) {
 
         // Iterate through the array and calculate the sums for each category
         despesasMes.forEach((object) => {
-            const categoryId = object.id_categoria - 1
+            const categoryId = object.id_categoria
             const value = object.valor
 
             // If the category already exists in the somaPorCategoria object, add the value to the existing sum
