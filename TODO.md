@@ -1,6 +1,7 @@
 # TODO List
 
--   [ ] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
+-   [ ] fazer funcionar a opção Registrar novo usuário
+-   [x] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
 -   [ ] Adicionar o campo data na transação (backend)
 -   [ ] Mostrar data na lista (frontend)
 -   [ ] Permitir editar e excluir transações.

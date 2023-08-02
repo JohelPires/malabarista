@@ -15,9 +15,11 @@ function ControlBar({ isAuth, reload, setReload }) {
     const [tipo, setTipo] = useState('')
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
-            setSaldo(data.data.saldo)
-        })
+        if (isAuth.usuario) {
+            axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
+                setSaldo(data.data.saldo)
+            })
+        }
     }, [reload, modalShow])
 
     function handleChange(e) {
