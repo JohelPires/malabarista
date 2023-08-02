@@ -1,19 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap'
+import { Button, Col, Container, Form, Modal, Row, Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
+import { money } from '../util/money'
+import AddModal from './AddModal'
 
 function ControlBar({ isAuth, reload, setReload }) {
     const [valor, setValor] = useState(0.0)
     const [showCateg, setShowCateg] = useState(false)
     const [categ, setCateg] = useState(0)
     const [saldo, setSaldo] = useState(0)
+    const [modalShow, setModalShow] = useState(false)
 
     useEffect(() => {
         axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
             setSaldo(data.data.saldo)
         })
-    }, [reload, showCateg])
+    }, [reload, modalShow])
 
     function handleChange(e) {
         console.log(e.target.value)
@@ -65,8 +68,20 @@ function ControlBar({ isAuth, reload, setReload }) {
                 <Button variant='success' size='sm' onClick={handleReceita}>
                     Receita
                 </Button>
-                <h3 className='ms-auto'>Saldo: R$ {saldo}</h3>
+                <Button variant='success' size='sm' onClick={() => setModalShow(true)}>
+                    Receita modal
+                </Button>
+                <h3 className='ms-auto'>Saldo: R$ {money(saldo)}</h3>
             </Stack>
+
+            <AddModal
+                setReload={setReload}
+                isAuth={isAuth}
+                show={modalShow}
+                tipo={'Receita'}
+                onHide={() => setModalShow(false)}
+            />
+
             {showCateg && (
                 <Container>
                     <Row>

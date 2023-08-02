@@ -86,7 +86,11 @@ function Categories({ dadosMes, mesAtual }) {
                     <h3>Despesas por categoria - {meses[mesAtual - 1]}</h3>
                 </div>
                 <div className='donut'>
-                    {dadosMes.length > 0 ? <Doughnut data={data} options={options} /> : 'Sem dados.'}
+                    {dadosMes.length > 0 ? (
+                        <Doughnut style={{ maxHeight: '200px' }} data={data} options={options} />
+                    ) : (
+                        'Sem dados.'
+                    )}
                 </div>
             </Stack>
         </Container>

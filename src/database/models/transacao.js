@@ -31,6 +31,10 @@ const Transacao = sequelize.define(
             type: DataTypes.FLOAT,
             allowNull: false,
         },
+        data: {
+            type: DataTypes.DATEONLY,
+            // allowNull: false,
+        },
         frequencia: {
             type: DataTypes.CHAR,
         },
