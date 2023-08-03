@@ -47,6 +47,10 @@ const Transacao = sequelize.define(
             allowNull: false,
             defaultValue: 0,
         },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
     { freezeTableName: true }
 )

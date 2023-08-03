@@ -1,6 +1,6 @@
 # TODO List
 
--   [ ] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
+-   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [ ] validações de formularios
 -   [ ] fazer funcionar a opção Registrar novo usuário
 -   [x] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
@@ -8,7 +8,7 @@
 -   [ ] Mostrar data na lista (frontend)
 -   [ ] A lista de transações deve ser construida com base no campo data e não o campo createdAt
 -   [ ] Fazer a nova lista do figma
--   [ ] Permitir editar e excluir transações. (excluir com tag deleted. não excluir do banco)
+-   [x] Permitir editar e excluir transações. (excluir com tag deleted. não excluir do banco)
 -   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
 -   [ ] melhorar responsividade

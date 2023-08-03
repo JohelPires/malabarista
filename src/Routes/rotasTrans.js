@@ -15,10 +15,10 @@ router.get('/', authMiddleware, TransController.listAll)
 //     res.json('teste')
 // })
 
-router.get('/:id', TransController.findId)
+// router.get('/:id', TransController.findId)
 
 router.put('/:id', authMiddleware, TransController.update)
 
-router.delete('/:id', TransController.deleta)
+router.delete('/:id', authMiddleware, TransController.deleta)
 
 module.exports = router

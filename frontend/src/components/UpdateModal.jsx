@@ -44,6 +44,22 @@ function UpdateModal(props) {
             })
             .catch((err) => console.log(err))
     }
+
+    function handleDelete() {
+        if (window.confirm('Tem certeza que quer deletar essa transação?')) {
+            axios
+                .delete(`http://localhost:5000/trans/${props.item.id}`, {
+                    headers: { Authorization: `Bearer ${props.isAuth.accessToken}` },
+                })
+                .then((data) => {
+                    console.log(data)
+                    props.setReload((prev) => prev + 1)
+                    props.onHide()
+                })
+                .catch((err) => console.log(err))
+        }
+    }
+
     return (
         <Modal {...props} size='md' aria-labelledby='contained-modal-title-vcenter' centered>
             <Modal.Header closeButton>
@@ -109,7 +125,7 @@ function UpdateModal(props) {
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='danger' onClick={handleAdd}>
+                <Button variant='danger' onClick={handleDelete}>
                     Excluir esta transação
                 </Button>
                 <Button variant='secondary' onClick={() => props.setShow(false)}>

@@ -10,6 +10,7 @@ function listAll(req, res) {
     Transacao.findAll({
         where: {
             id_usuario: req.userId,
+            deleted: false,
         },
     })
         .then((result) => {
@@ -63,16 +64,38 @@ function update(req, res) {
         })
 }
 
+// function deleta(req, res) {
+//     const { id } = req.params
+//     Transacao.destroy({
+//         where: {
+//             id: parseInt(id),
+//         },
+//     })
+//         .then((result) => {
+//             if (result) {
+//                 res.status(200).json('Transacao deletada com sucesso.')
+//             } else {
+//                 res.status(404).json('não encontrado.')
+//             }
+//         })
+//         .catch((err) => {
+//             res.status(400).json(err)
+//         })
+// }
+
 function deleta(req, res) {
     const { id } = req.params
-    Transacao.destroy({
-        where: {
-            id: parseInt(id),
-        },
-    })
+    Transacao.update(
+        { deleted: true },
+        {
+            where: {
+                id: parseInt(id),
+            },
+        }
+    )
         .then((result) => {
-            if (result) {
-                res.status(200).json('Transacao deletada com sucesso.')
+            if (result[0]) {
+                res.status(200).json('Transacao apagada.')
             } else {
                 res.status(404).json('não encontrado.')
             }

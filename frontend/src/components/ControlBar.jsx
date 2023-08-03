@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Stack } from 'react-bootstrap'
+import { Button, Col, Container, Form, Modal, Placeholder, Row, Spinner, Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
 import { money } from '../util/money'
 import AddModal from './AddModal'
@@ -13,13 +13,22 @@ function ControlBar({ isAuth, reload, setReload }) {
     const [modalShow, setModalShow] = useState(false)
     const [categoria, setCategoria] = useState(0)
 
+    const [loadingSaldo, setLoadingSaldo] = useState(true)
+
     const [tipo, setTipo] = useState('')
 
     useEffect(() => {
+        setLoadingSaldo(true)
         if (isAuth.usuario) {
-            axios.get(`http://localhost:5000/usuario/${isAuth.usuario.id}`).then((data) => {
-                setSaldo(data.data.saldo)
-            })
+            axios
+                .get('http://localhost:5000/usuario/saldo', {
+                    headers: { Authorization: `Bearer ${isAuth.accessToken}` },
+                })
+                .then((data) => {
+                    console.log(data.data)
+                    setSaldo(data.data)
+                    setLoadingSaldo(false)
+                })
         }
     }, [reload, modalShow])
 
@@ -96,7 +105,21 @@ function ControlBar({ isAuth, reload, setReload }) {
                 >
                     Adicionar despesa
                 </Button>
-                <h5 className='ms-auto m-0'>Saldo: R$ {money(saldo)}</h5>
+                <h5 className='ms-auto m-0'>
+                    Saldo: R${' '}
+                    {loadingSaldo ? (
+                        <Spinner
+                            className='ms-auto m-0'
+                            as='span'
+                            animation='border'
+                            size='sm'
+                            role='status'
+                            aria-hidden='true'
+                        />
+                    ) : (
+                        money(saldo)
+                    )}
+                </h5>
             </Stack>
 
             <AddModal
