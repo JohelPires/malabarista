@@ -117,9 +117,14 @@ function deleta(req, res) {
 
 function getSaldo(req, res) {
     const id = req.userId
-    sequelize.query(`SELECT SUM(valor) FROM transacao WHERE id_usuario=${id}`).then((data) => {
-        res.status(200).json(data)
-    })
+    sequelize
+        .query(`SELECT SUM(valor) FROM transacao WHERE id_usuario=${id}`)
+        .then((data) => {
+            res.status(200).json(data[0][0])
+        })
+        .catch((err) => {
+            res.status(400).json(err)
+        })
 }
 
 function updateSaldo(id, valor) {
