@@ -1,4 +1,4 @@
-// const { Sequelize, DataTypes } = require('sequelize')
+// const sequelize = require('sequelize')
 // const sequelize = require('../database/db')
 const { SECRET_KEY, SALT } = require('../secret')
 
@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const Usuario = require('../database/models/usuario') //(sequelize, DataTypes)
+const sequelize = require('../database/db')
 
 function listAll(req, res) {
     Usuario.findAll()
@@ -114,6 +115,13 @@ function deleta(req, res) {
         })
 }
 
+function getSaldo(req, res) {
+    const id = req.userId
+    sequelize.query(`SELECT SUM(valor) FROM transacao WHERE id_usuario=${id}`).then((data) => {
+        res.status(200).json(data)
+    })
+}
+
 function updateSaldo(id, valor) {
     let saldo
     Usuario.findByPk(id)
@@ -141,4 +149,4 @@ function updateSaldo(id, valor) {
         })
 }
 
-module.exports = { listAll, addUsuario, findId, update, deleta, login, updateSaldo }
+module.exports = { listAll, addUsuario, findId, update, deleta, login, updateSaldo, getSaldo }
