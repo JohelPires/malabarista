@@ -26,7 +26,13 @@ function App() {
                 <Routes>
                     <Route
                         path='/'
-                        element={isAuth ? <Main isAuth={isAuth} reload={reload} /> : <Navigate to={'/login'} />}
+                        element={
+                            isAuth ? (
+                                <Main isAuth={isAuth} setReload={setReload} reload={reload} />
+                            ) : (
+                                <Navigate to={'/login'} />
+                            )
+                        }
                     />
                     <Route path='login' element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />
                     <Route path='registrar' element={<Registrar isAuth={isAuth} setIsAuth={setIsAuth} />} />

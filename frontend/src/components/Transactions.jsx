@@ -5,7 +5,7 @@ import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
 
-function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
+function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
     // const [data, setData] = useState(testData.transactions)
     // const [mesAtual, setMesAtual] = useState(new Date().getMonth() + 1)
     const [mes, setMes] = useState('')
@@ -66,7 +66,7 @@ function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual
                     <Spinner animation='border' variant='primary' />
                 ) : dadosMes.length > 0 ? (
                     dadosMes.map((item) => {
-                        return <TransItem item={item} />
+                        return <TransItem key={item.id} isAuth={isAuth} setReload={setReload} item={item} />
                     })
                 ) : (
                     <p>{msg}</p>

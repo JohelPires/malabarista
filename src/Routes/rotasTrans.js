@@ -17,7 +17,7 @@ router.get('/', authMiddleware, TransController.listAll)
 
 router.get('/:id', TransController.findId)
 
-router.put('/:id', TransController.update)
+router.put('/:id', authMiddleware, TransController.update)
 
 router.delete('/:id', TransController.deleta)
 

@@ -21,10 +21,10 @@ function listAll(req, res) {
 }
 
 function add(req, res) {
-    const { valor, descricao, id_conta, frequencia, periodica, id_categoria } = req.body
+    const { valor, descricao, id_conta, frequencia, periodica, id_categoria, data } = req.body
     const id_usuario = req.userId
     updateSaldo(id_usuario, valor)
-    Transacao.create({ id_usuario, valor, descricao, id_conta, frequencia, periodica, id_categoria })
+    Transacao.create({ id_usuario, valor, descricao, id_conta, frequencia, periodica, id_categoria, data })
         .then((result) => {
             res.status(200).json(result)
         })
