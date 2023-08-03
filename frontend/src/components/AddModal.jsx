@@ -21,25 +21,25 @@ function AddModal(props) {
     }
 
     function handleAdd() {
-        setValor((prev) => (props.tipo === 'Receita' ? prev : prev * -1))
-        console.log({
-            valor: valor,
+        if (props.tipo === 'Despesa') {
+            console.log(props.tipo)
+            const negValor = valor * -1
+            setValor(negValor)
+            console.log(valor * -1)
+        }
+        const transaction = {
+            valor: props.tipo === 'Despesa' ? valor * -1 : valor,
             data: date,
             id_categoria: categoria,
             descricao: descricao,
-        })
+        }
+
+        console.log(transaction)
 
         axios
-            .post(
-                'http://localhost:5000/trans',
-                {
-                    valor: valor,
-                    data: date,
-                    id_categoria: categoria,
-                    descricao: descricao,
-                },
-                { headers: { Authorization: `Bearer ${props.isAuth.accessToken}` } }
-            )
+            .post('http://localhost:5000/trans', transaction, {
+                headers: { Authorization: `Bearer ${props.isAuth.accessToken}` },
+            })
             .then((data) => {
                 console.log('Transação adicionada.')
                 setCategoria(props.tipo === 'Receita' ? 1000 : 0)
@@ -49,6 +49,7 @@ function AddModal(props) {
                 axios.get(`http://localhost:5000/usuario/${props.isAuth.usuario.id}`).then((data) => {
                     props.setSaldo(data.data.saldo)
                 })
+                props.setReload((prev) => prev + 1)
                 props.onHide()
             })
             .catch((err) => console.log(err))
@@ -64,7 +65,7 @@ function AddModal(props) {
                     <InputGroup className='mb-3'>
                         <InputGroup.Text id='basic-addon1'>R$</InputGroup.Text>
                         <Form.Control
-                            onChange={(e) => setValor(e.target.value)}
+                            onChange={(e) => setValor(parseFloat(e.target.value))}
                             placeholder='Valor'
                             type='number'
                             aria-label='Username'
