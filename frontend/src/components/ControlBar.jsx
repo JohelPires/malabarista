@@ -11,6 +11,7 @@ function ControlBar({ isAuth, reload, setReload }) {
     const [categ, setCateg] = useState(0)
     const [saldo, setSaldo] = useState(0)
     const [modalShow, setModalShow] = useState(false)
+    const [categoria, setCategoria] = useState(0)
 
     const [tipo, setTipo] = useState('')
 
@@ -23,22 +24,22 @@ function ControlBar({ isAuth, reload, setReload }) {
     }, [reload, modalShow])
 
     function handleChange(e) {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setValor(parseFloat(e.target.value))
     }
 
     function handleDespesa() {
-        console.log(cat.despesas[categ - 1])
+        // console.log(cat.despesas[categ - 1])
         setValor((prev) => prev * -1)
         setShowCateg('DESPESA')
     }
     function handleReceita() {
-        console.log(cat.receitas[categ - 1000])
+        // console.log(cat.receitas[categ - 1000])
         setShowCateg('RECEITA')
     }
 
     function handleConfirma() {
-        console.log(valor)
+        // console.log(valor)
         axios
             .post(
                 'http://localhost:5000/trans',
@@ -47,7 +48,7 @@ function ControlBar({ isAuth, reload, setReload }) {
             )
             .then((data) => console.log(data))
             .catch((err) => console.log(err))
-        console.log(categ)
+        // console.log(categ)
         setValor(0)
         setReload((prev) => prev + 1)
         setShowCateg(false)
@@ -77,6 +78,7 @@ function ControlBar({ isAuth, reload, setReload }) {
                     size='sm'
                     onClick={() => {
                         setTipo('Receita')
+                        setCategoria(1000)
                         setModalShow(true)
                     }}
                 >
@@ -88,6 +90,7 @@ function ControlBar({ isAuth, reload, setReload }) {
                     size='sm'
                     onClick={() => {
                         setTipo('Despesa')
+                        setCategoria(0)
                         setModalShow(true)
                     }}
                 >
@@ -101,6 +104,8 @@ function ControlBar({ isAuth, reload, setReload }) {
                 setSaldo={setSaldo}
                 isAuth={isAuth}
                 show={modalShow}
+                categoria={categoria}
+                setCategoria={setCategoria}
                 tipo={tipo}
                 onHide={() => setModalShow(false)}
             />

@@ -10,6 +10,7 @@ function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual
     // const [mesAtual, setMesAtual] = useState(new Date().getMonth() + 1)
     const [mes, setMes] = useState('')
     const [loading, setLoading] = useState(true)
+    const [msg, setMsg] = useState('')
 
     useEffect(() => {
         setMes(meses[mesAtual - 1])
@@ -24,8 +25,12 @@ function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual
                 setDadosMes(data.data.filter((item) => parseInt(item.createdAt.slice(5, 7)) === mesAtual))
                 setData(data.data)
                 setLoading(false)
+                setMsg('Não houve transações registradas neste mês.')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                setMsg('Houve um erro.')
+                console.log(err)
+            })
     }, [reload, mesAtual])
 
     return (
@@ -64,7 +69,7 @@ function Transactions({ isAuth, reload, setData, setDadosMes, dadosMes, mesAtual
                         return <TransItem item={item} />
                     })
                 ) : (
-                    'Não houve transações registradas neste mês.'
+                    <p>{msg}</p>
                 )}
             </Stack>
         </Container>

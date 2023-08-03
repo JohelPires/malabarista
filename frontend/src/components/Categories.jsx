@@ -41,13 +41,13 @@ function Categories({ dadosMes, mesAtual }) {
             }
         })
 
-        console.log('soma por categoria: ', somaPorCategoria)
+        // console.log('soma por categoria: ', somaPorCategoria)
         setDadosCategoria(Object.values(somaPorCategoria))
         const keys = Object.keys(somaPorCategoria)
         keys.map((key, i) => {
             keys[i] = despesas[key]
         })
-        console.log(keys)
+        // console.log(keys)
         setLabelsCategoria(keys)
     }, [dadosMes])
 

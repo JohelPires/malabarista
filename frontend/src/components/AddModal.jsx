@@ -5,36 +5,37 @@ import axios from 'axios'
 
 function AddModal(props) {
     const [validated, setValidated] = useState(false)
-    const [categoria, setCategoria] = useState(props.tipo === 'Receita' ? 1000 : 0)
+
     const [valor, setValor] = useState(0)
     const [date, setDate] = useState(new Date().toISOString().substring(0, 10))
     const [descricao, setDescricao] = useState('')
 
-    useEffect(() => {
-        setCategoria(props.tipo === 'Receita' ? 1000 : 0)
-    }, [])
+    // useEffect(() => {
+    //     setCategoria(props.tipo === 'Receita' ? 1000 : 0)
+    // }, [])
 
     function handleCategoria(e) {
         props.tipo === 'Receita'
-            ? setCategoria(parseInt(e.target.value) + 1000)
-            : setCategoria(parseInt(e.target.value) + 1)
+            ? props.setCategoria(parseInt(e.target.value) + 1000)
+            : props.setCategoria(parseInt(e.target.value))
     }
 
     function handleAdd() {
-        if (props.tipo === 'Despesa') {
-            console.log(props.tipo)
-            const negValor = valor * -1
-            setValor(negValor)
-            console.log(valor * -1)
-        }
+        console.log(props.tipo)
+        // if (props.tipo === 'Despesa') {
+        //     // console.log(props.tipo)
+        //     const negValor = valor * -1
+        //     setValor(negValor)
+        //     // console.log(valor * -1)
+        // }
         const transaction = {
             valor: props.tipo === 'Despesa' ? valor * -1 : valor,
             data: date,
-            id_categoria: categoria,
+            id_categoria: props.categoria,
             descricao: descricao,
         }
 
-        console.log(transaction)
+        // console.log(transaction)
 
         axios
             .post('http://localhost:5000/trans', transaction, {
@@ -42,7 +43,7 @@ function AddModal(props) {
             })
             .then((data) => {
                 console.log('Transação adicionada.')
-                setCategoria(props.tipo === 'Receita' ? 1000 : 0)
+                // setCategoria(props.tipo === 'Receita' ? 1000 : 0)
                 setDate(new Date().toISOString().substring(0, 10))
                 setDescricao('')
                 setValor(0)
@@ -81,7 +82,7 @@ function AddModal(props) {
                     <InputGroup.Text id='basic-addon1'>Categoria</InputGroup.Text>
                     <Form.Select
                         onChange={handleCategoria}
-                        defaultValue={categoria}
+                        // defaultValue={categoria}
                         aria-label='Default select example'
                     >
                         {props.tipo === 'Receita'
