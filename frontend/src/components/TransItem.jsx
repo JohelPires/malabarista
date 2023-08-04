@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Stack } from 'react-bootstrap'
+import { Col, Container, Row, Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
 import { money } from '../util/money'
 import UpdateModal from './UpdateModal'
@@ -48,7 +48,7 @@ function TransItem({ item, isAuth, setReload }) {
                     console.log(`editar item ${item.id}`)
                     setUpdateShow(true)
                 }}
-                className='mb-3 cursor'
+                className='mb-0 cursor'
                 direction='horizontal'
                 gap={2}
             >
@@ -56,10 +56,27 @@ function TransItem({ item, isAuth, setReload }) {
                 <h6 style={{ fontWeight: 'bold' }} className='m-0'>
                     R${money(showItemValue(item.valor))}
                 </h6>
-                <h6 style={{ fontWeight: 'bold' }} className='m-0 ms-auto'>
+                <h6 style={{ fontWeight: 'bold', fontSize: '14px' }} className='m-0 ms-auto'>
                     {categoria(item.id_categoria)}
                 </h6>
             </Stack>
+            <Stack
+                role='button'
+                onClick={() => {
+                    console.log(`editar item ${item.id}`)
+                    setUpdateShow(true)
+                }}
+                className='mb-3 cursor'
+                direction='horizontal'
+                gap={2}
+            >
+                <div style={{ width: '14px' }}></div>
+                <div>{item.descricao}</div>
+                <h6 style={{ fontSize: '14px' }} className='m-0 ms-auto'>
+                    Dia {item.data ? parseInt(item.data.slice(9, 11)) : parseInt(item.createdAt.slice(9, 11))}
+                </h6>
+            </Stack>
+
             <UpdateModal
                 isAuth={isAuth}
                 item={item}
