@@ -4,6 +4,7 @@
 -   [ ] ordenar lista pelo dia do mes
 -   [ ] validações de formularios
 -   [ ] fazer funcionar a opção Registrar novo usuário
+    -   [ ] arrumar: quando registra novo usuario, fica aparecendo o loading spinner pra lista e pro saldo.
 -   [x] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
 -   [x] Adicionar o campo data na transação (backend)
 -   [x] Mostrar data na lista (frontend)

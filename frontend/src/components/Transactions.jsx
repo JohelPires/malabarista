@@ -31,8 +31,8 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                         return parseInt(date.slice(5, 7)) === mesAtual
                     })
                 )
-                const sortedItems = [...dadosMes].sort((a, b) => a.data - b.data)
-                setDadosMes(sortedItems)
+                // const sortedItems = [...dadosMes].sort((a, b) => a.data - b.data)
+                // setDadosMes(sortedItems)
                 setData(data.data)
                 setLoading(false)
                 setMsg('Não houve transações registradas neste mês.')
