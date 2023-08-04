@@ -22,7 +22,15 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
             .get('http://localhost:5000/trans', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
             .then((data) => {
                 // setMes(meses[parseInt(data.data[data.data.length - 1].createdAt.slice(5, 7)) - 1])
-                setDadosMes(data.data.filter((item) => parseInt(item.createdAt.slice(5, 7)) === mesAtual))
+                data.data.map((item) => {
+                    console.log(item.data, item.createdAt)
+                })
+                setDadosMes(
+                    data.data.filter((item) => {
+                        const date = item.data || item.createdAt
+                        return parseInt(date.slice(5, 7)) === mesAtual
+                    })
+                )
                 setData(data.data)
                 setLoading(false)
                 setMsg('Não houve transações registradas neste mês.')

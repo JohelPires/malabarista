@@ -30,7 +30,10 @@ function BarStats({ dados }) {
         const anoReceita = []
         const anoDespesa = []
         for (let i = 0; i < 12; i++) {
-            dadosMes = dados.filter((item) => parseInt(item.createdAt.slice(5, 7)) === i + 1)
+            dadosMes = dados.filter((item) => {
+                const mes = item.data || item.createdAt
+                return parseInt(mes.slice(5, 7)) === i + 1
+            })
             let somaReceita = 0
             let somaDespesa = 0
 
@@ -56,20 +59,12 @@ function BarStats({ dados }) {
             {
                 label: 'Despesas',
                 data: mesesDespesa,
-                backgroundColor: '#F2CB70',
+                backgroundColor: '#E2B13D',
             },
             {
                 label: 'Receitas',
                 data: mesesReceita,
-                backgroundColor: [
-                    'rgba(53, 162, 235, 0.3)',
-                    'rgba(53, 162, 235, 0.4)',
-                    'rgba(53, 162, 235, 0.5)',
-                    'rgba(53, 162, 235, 0.6)',
-                    'rgba(53, 162, 235, 0.7)',
-                    'rgba(53, 162, 235, 0.8)',
-                    'rgba(53, 162, 235, 0.9)',
-                ],
+                backgroundColor: '#49ABED',
             },
         ],
     }

@@ -5,8 +5,23 @@ import { money } from '../util/money'
 import UpdateModal from './UpdateModal'
 
 function TransItem({ item, isAuth, setReload }) {
-    const receita = { height: '14px', width: '7px', backgroundColor: 'green' }
-    const despesa = { height: '14px', width: '7px', backgroundColor: 'orange' }
+    // const receita = { height: '14px', width: '7px', backgroundColor: 'green' }
+    const receita = {
+        width: '0',
+        height: '0',
+        borderLeft: '7px solid transparent',
+        borderRight: '7px solid transparent',
+        borderBottom: '7px solid #49ABED',
+    }
+    const despesa = {
+        width: '0',
+        height: '0',
+        borderLeft: '7px solid transparent',
+        borderRight: '7px solid transparent',
+        borderTop: '7px solid #E2B13D',
+    }
+
+    // const despesa = { height: '14px', width: '7px', backgroundColor: 'orange' }
     const [updateShow, setUpdateShow] = useState(false)
 
     function showItemValue(value) {
