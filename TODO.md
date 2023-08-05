@@ -1,7 +1,7 @@
 # TODO List
 
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
--   [ ] ordenar lista pelo dia do mes
+-   [x] ordenar lista pelo dia do mes
 -   [ ] validações de formularios
 -   [ ] fazer funcionar a opção Registrar novo usuário
     -   [ ] arrumar: quando registra novo usuario, fica aparecendo o loading spinner pra lista e pro saldo.
@@ -11,6 +11,7 @@
 -   [x] A lista de transações deve ser construida com base no campo data e não o campo createdAt
 -   [x] Fazer a nova lista do figma
 -   [x] Permitir editar e excluir transações. (excluir com tag deleted. não excluir do banco)
+-   [ ] arrumar a barra de navegação e links
 -   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
 -   [ ] melhorar responsividade
