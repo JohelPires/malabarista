@@ -23,13 +23,21 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
             .then((data) => {
                 // setMes(meses[parseInt(data.data[data.data.length - 1].createdAt.slice(5, 7)) - 1])
 
-                const filterData = data.data.filter((item) => {
+                const newData = data.data.map((item) => {
                     const date = item.data || item.createdAt
-                    return parseInt(date.slice(5, 7)) === mesAtual
-                })
-                const sortedData = [...filterData].sort((a, b) => a.data - b.data)
 
-                setDadosMes(filterData)
+                    return {
+                        ...item,
+                        m: parseInt(date.slice(5, 7)),
+                        y: parseInt(date.slice(0, 4)),
+                        d: parseInt(date.slice(9, 11)),
+                    }
+                })
+
+                const filteredData = newData.filter((item) => item.m === mesAtual)
+                const sortedData = [...filteredData].sort((a, b) => b.d - a.d)
+
+                setDadosMes(sortedData)
                 // setDadosMes(
                 //     data.data.filter((item) => {
                 //         const date = item.data || item.createdAt
