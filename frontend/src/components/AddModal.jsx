@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Button, Dropdown, DropdownButton, Form, InputGroup, Modal, Stack } from 'react-bootstrap'
 import { despesas, receitas } from '../data/categorias'
 import axios from 'axios'
+import { useForm } from 'react-hook-form'
 
 function AddModal(props) {
     const [validated, setValidated] = useState(false)
@@ -9,6 +10,15 @@ function AddModal(props) {
     const [valor, setValor] = useState(0)
     const [date, setDate] = useState(new Date().toISOString().substring(0, 10))
     const [descricao, setDescricao] = useState('')
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
+    // const onSubmit = (data) => console.log(data)
 
     // useEffect(() => {
     //     setCategoria(props.tipo === 'Receita' ? 1000 : 0)
@@ -20,8 +30,17 @@ function AddModal(props) {
             : props.setCategoria(parseInt(e.target.value))
     }
 
-    function handleAdd() {
-        console.log(props.tipo)
+    const validateNonZero = (value) => {
+        if (value != 0) {
+            return true
+        } else {
+            return 'Número deve ser diferente de zero'
+        }
+    }
+
+    function onSubmit(data) {
+        // e.preventDefault()
+        console.log(data)
         // if (props.tipo === 'Despesa') {
         //     // console.log(props.tipo)
         //     const negValor = valor * -1
@@ -29,7 +48,7 @@ function AddModal(props) {
         //     // console.log(valor * -1)
         // }
         const transaction = {
-            valor: props.tipo === 'Despesa' ? valor * -1 : valor,
+            valor: props.tipo === 'Despesa' ? data.valor * -1 : data.valor,
             data: date,
             id_categoria: props.categoria,
             descricao: descricao,
@@ -57,57 +76,64 @@ function AddModal(props) {
     }
     return (
         <Modal {...props} size='md' aria-labelledby='contained-modal-title-vcenter' centered>
-            <Modal.Header closeButton>
-                <Modal.Title id='contained-modal-title-vcenter'>Adicionar {props.tipo}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{ background: '#F0F0F0' }}>
-                <Alert variant='warning'>Digite um valor maior que zero.</Alert>
-                <Stack direction='horizontal' gap={1}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <Modal.Header closeButton>
+                    <Modal.Title id='contained-modal-title-vcenter'>Adicionar {props.tipo}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ background: '#F0F0F0' }}>
+                    <Alert variant='warning'>Digite um valor maior que zero.</Alert>
+                    {errors.valor && <span style={{ color: 'red' }}>Digite um valor diferente de zero</span>}
+                    <Stack direction='horizontal' gap={1}>
+                        <InputGroup className='mb-3'>
+                            <InputGroup.Text id='basic-addon1'>R$</InputGroup.Text>
+                            <Form.Control
+                                // onChange={(e) => setValor(parseFloat(e.target.value))}
+                                placeholder='Valor'
+                                type='number'
+                                aria-label='Username'
+                                aria-describedby='basic-addon1'
+                                {...register('valor', { required: true, validate: validateNonZero })}
+                            />
+                        </InputGroup>
+                        <InputGroup className='mb-3'>
+                            <InputGroup.Text id='basic-addon1'>Data</InputGroup.Text>
+                            <Form.Control type='date' defaultValue={date} onChange={(e) => setDate(e.target.value)} />
+                        </InputGroup>
+                    </Stack>
                     <InputGroup className='mb-3'>
-                        <InputGroup.Text id='basic-addon1'>R$</InputGroup.Text>
+                        <InputGroup.Text id='basic-addon1'>Categoria</InputGroup.Text>
+                        <Form.Select
+                            onChange={handleCategoria}
+                            // defaultValue={categoria}
+                            aria-label='Default select example'
+                        >
+                            {props.tipo === 'Receita'
+                                ? receitas.map((c, i) => {
+                                      return <option value={i}>{c}</option>
+                                  })
+                                : despesas.map((c, i) => {
+                                      return <option value={i}>{c}</option>
+                                  })}
+                        </Form.Select>
+                    </InputGroup>
+                    <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+                        {/* <Form.Label>Example textarea</Form.Label> */}
                         <Form.Control
-                            onChange={(e) => setValor(parseFloat(e.target.value))}
-                            placeholder='Valor'
-                            type='number'
-                            aria-label='Username'
-                            aria-describedby='basic-addon1'
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
+                            as='textarea'
+                            rows={3}
+                            placeholder='Descrição (opcional)'
                         />
-                    </InputGroup>
-                    <InputGroup className='mb-3'>
-                        <InputGroup.Text id='basic-addon1'>Data</InputGroup.Text>
-                        <Form.Control type='date' defaultValue={date} onChange={(e) => setDate(e.target.value)} />
-                    </InputGroup>
-                </Stack>
-                <InputGroup className='mb-3'>
-                    <InputGroup.Text id='basic-addon1'>Categoria</InputGroup.Text>
-                    <Form.Select
-                        onChange={handleCategoria}
-                        // defaultValue={categoria}
-                        aria-label='Default select example'
-                    >
-                        {props.tipo === 'Receita'
-                            ? receitas.map((c, i) => {
-                                  return <option value={i}>{c}</option>
-                              })
-                            : despesas.map((c, i) => {
-                                  return <option value={i}>{c}</option>
-                              })}
-                    </Form.Select>
-                </InputGroup>
-                <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
-                    {/* <Form.Label>Example textarea</Form.Label> */}
-                    <Form.Control
-                        value={descricao}
-                        onChange={(e) => setDescricao(e.target.value)}
-                        as='textarea'
-                        rows={3}
-                        placeholder='Descrição (opcional)'
-                    />
-                </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={handleAdd}>Adicionar</Button>
-            </Modal.Footer>
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide} variant='secondary'>
+                        Cancelar
+                    </Button>
+                    <Button type='submit'>Adicionar</Button>
+                </Modal.Footer>
+            </Form>
         </Modal>
     )
 }

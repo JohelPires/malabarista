@@ -19,6 +19,9 @@
 -   [x] função para mostrar números em formato monetário.
 -   [ ] função para mostrar data em formato brasileiro
 -   [ ] categorias customizadas
+-   [ ] Documentação e 'Sobre'
+-   [ ] teclas de atalho
+-   [ ] usar o timestamp pode ser interessante pra adicionar na lista por ordem de adicionamento.
 
 ## Long-term Ideas
 
