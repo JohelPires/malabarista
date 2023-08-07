@@ -2,7 +2,7 @@
 
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [x] ordenar lista pelo dia do mes
--   [ ] validações de formularios
+-   [ ] validações de formularios usando hook form
 -   [ ] fazer funcionar a opção Registrar novo usuário
     -   [ ] arrumar: quando registra novo usuario, fica aparecendo o loading spinner pra lista e pro saldo.
 -   [x] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
