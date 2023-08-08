@@ -3,10 +3,11 @@
 -   [ ] upload to heroku
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [x] ordenar lista pelo dia do mes
--   [ ] validações de formularios
-    -   [ ] falta o das telas de login e registrar
+-   [ ] migrar o login para submit form
+-   [x] validações de formularios
+    -   [x] falta o das telas de login e registrar
     -   [ ] ver videos do hook-forms e do formik yup
--   [ ] fazer funcionar a opção Registrar novo usuário
+-   [x] fazer funcionar a opção Registrar novo usuário
     -   [x] arrumar: quando registra novo usuario, fica aparecendo o loading spinner pra lista e pro saldo.
 -   [x] Melhorar a barra de controle para adicionar receitas e despesas incluindo descrição. Talvez um pop-up.
 -   [x] Adicionar o campo data na transação (backend)
@@ -26,6 +27,7 @@
 -   [ ] Documentação e 'Sobre'
 -   [ ] teclas de atalho
 -   [x] usar o timestamp pode ser interessante pra adicionar na lista por ordem de adicionamento.
+-   [ ] fazer uma tela de bem-vindo com o botao para login / registrar
 
 ## Long-term Ideas
 

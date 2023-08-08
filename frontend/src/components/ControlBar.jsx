@@ -25,8 +25,9 @@ function ControlBar({ isAuth, reload, setReload }) {
                     headers: { Authorization: `Bearer ${isAuth.accessToken}` },
                 })
                 .then((data) => {
-                    console.log(data.data)
-                    setSaldo(data.data)
+                    if (data.data) {
+                        setSaldo(data.data)
+                    }
                     setLoadingSaldo(false)
                 })
         }

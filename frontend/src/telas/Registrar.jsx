@@ -1,21 +1,25 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Button, Col, Container, FloatingLabel, Form, Row, Stack } from 'react-bootstrap'
+import { Alert, Button, Col, Container, FloatingLabel, Form, Row, Stack } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Registrar({ setIsAuth }) {
     const [novousuario, setNovousuario] = useState({})
     const [senha, setSenha] = useState('')
     const navigate = useNavigate()
+    const [erro, setErro] = useState('')
 
-    function handleRegistrar() {
-        axios
-            .post('http://localhost:5000/usuario/registrar', novousuario)
-            .then((data) => {
-                // setIsAuth(data.data)
-                navigate('/login')
-            })
-            .catch((err) => console.log(err))
+    function handleRegistrar(e) {
+        e.preventDefault()
+        if (novousuario.senha === senha) {
+            axios
+                .post('http://localhost:5000/usuario/registrar', novousuario)
+                .then((data) => {
+                    console.log(data.response)
+                    navigate('/login')
+                })
+                .catch((err) => console.log(err))
+        }
     }
 
     return (
@@ -23,7 +27,7 @@ function Registrar({ setIsAuth }) {
             <Row className='p-3'>
                 <Col md={7}></Col>
                 <Col className='bg-white round main-shadow'>
-                    <Form className=' p-4'>
+                    <Form className=' p-4' onSubmit={handleRegistrar}>
                         <div className='transaction_month'>
                             <h3>Registrar</h3>
                         </div>
@@ -32,6 +36,7 @@ function Registrar({ setIsAuth }) {
                                 size='sm'
                                 type='text'
                                 placeholder='Nome'
+                                required
                                 onChange={(e) => setNovousuario({ ...novousuario, nome: e.target.value })}
                             />
                         </FloatingLabel>
@@ -40,6 +45,7 @@ function Registrar({ setIsAuth }) {
                                 size='sm'
                                 type='email'
                                 placeholder='nome@exemplo.com'
+                                required
                                 onChange={(e) => setNovousuario({ ...novousuario, email: e.target.value })}
                             />
                         </FloatingLabel>
@@ -56,11 +62,19 @@ function Registrar({ setIsAuth }) {
                                 size='sm'
                                 type='password'
                                 placeholder='senha'
-                                onChange={(e) => setSenha(e.target.value)}
+                                onChange={(e) => {
+                                    setSenha(e.target.value)
+                                    if (e.target.value !== novousuario.senha) {
+                                        setErro('Senhas não conferem.')
+                                    } else {
+                                        setErro('')
+                                    }
+                                }}
                             />
                         </FloatingLabel>
+                        {erro && <Alert variant='danger'>{erro}</Alert>}
                         <Stack gap={2}>
-                            <Button className='mt-4' onClick={handleRegistrar}>
+                            <Button className='mt-4' type='submit'>
                                 Registrar
                             </Button>
                             <Link to={'/login'}>Já é usuário? Faça login</Link>
