@@ -26,7 +26,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                 const newData = data.data.map((item) => {
                     const timestamp = new Date(item.createdAt)
                     const dayofweek = new Date(item.data).getDay()
-                    console.log(dayofweek)
+
                     const date = item.data || item.createdAt
 
                     return {
