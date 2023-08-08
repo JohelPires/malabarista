@@ -24,6 +24,9 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                 // setMes(meses[parseInt(data.data[data.data.length - 1].createdAt.slice(5, 7)) - 1])
 
                 const newData = data.data.map((item) => {
+                    const timestamp = new Date(item.createdAt)
+                    const dayofweek = new Date(item.data).getDay()
+                    console.log(dayofweek)
                     const date = item.data || item.createdAt
 
                     return {
@@ -31,11 +34,13 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                         m: parseInt(date.slice(5, 7)),
                         y: parseInt(date.slice(0, 4)),
                         d: parseInt(date.slice(9, 11)),
+                        dayofweek,
+                        timestamp,
                     }
                 })
 
                 const filteredData = newData.filter((item) => item.m === mesAtual)
-                const sortedData = [...filteredData].sort((a, b) => b.d - a.d)
+                const sortedData = [...filteredData].sort((a, b) => b.timestamp - a.timestamp)
 
                 setDadosMes(sortedData)
                 // setDadosMes(

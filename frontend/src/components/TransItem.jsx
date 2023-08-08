@@ -5,6 +5,7 @@ import { money } from '../util/money'
 import UpdateModal from './UpdateModal'
 
 function TransItem({ item, isAuth, setReload }) {
+    const dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']
     // const receita = { height: '14px', width: '7px', backgroundColor: 'green' }
     const receita = {
         width: '0',
@@ -73,11 +74,12 @@ function TransItem({ item, isAuth, setReload }) {
                 <div style={{ width: '14px' }}></div>
                 <div>{item.descricao}</div>
                 <h6 style={{ fontSize: '14px' }} className='m-0 ms-auto'>
-                    Dia {item.data ? parseInt(item.data.slice(9, 11)) : parseInt(item.createdAt.slice(9, 11))}
+                    {dias[item.dayofweek]}, dia {item.d}
                 </h6>
             </Stack>
 
             <UpdateModal
+                key={item.id}
                 isAuth={isAuth}
                 item={item}
                 setReload={setReload}

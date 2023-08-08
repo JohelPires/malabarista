@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, FloatingLabel, Form, Row, Stack } from 'react-bootstrap'
+import { Alert, Button, Col, Container, FloatingLabel, Form, Row, Stack } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Login({ isAuth, setIsAuth }) {
@@ -32,7 +32,9 @@ function Login({ isAuth, setIsAuth }) {
                 setIsAuth(data.data)
                 navigate('/')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                setErro(err.response.data.erro)
+            })
     }
 
     return (
@@ -43,6 +45,7 @@ function Login({ isAuth, setIsAuth }) {
                     <div className='transaction_month'>
                         <h3>Fazer Login</h3>
                     </div>
+                    {erro && <Alert variant='danger'>{erro}</Alert>}
                     <FloatingLabel controlId='floatingInput' label='E-mail' className='mb-3 mt-4'>
                         <Form.Control
                             value={user.email}

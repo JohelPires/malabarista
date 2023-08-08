@@ -47,8 +47,9 @@ function AddModal(props) {
         //     setValor(negValor)
         //     // console.log(valor * -1)
         // }
+
         const transaction = {
-            valor: props.tipo === 'Despesa' ? data.valor * -1 : data.valor,
+            valor: props.tipo === 'Despesa' ? parseFloat(data.valor) * -1 : parseFloat(data.valor),
             data: date,
             id_categoria: props.categoria,
             descricao: descricao,
@@ -65,7 +66,7 @@ function AddModal(props) {
                 // setCategoria(props.tipo === 'Receita' ? 1000 : 0)
                 setDate(new Date().toISOString().substring(0, 10))
                 setDescricao('')
-                setValor(0)
+                data.valor = 0
                 axios.get(`http://localhost:5000/usuario/${props.isAuth.usuario.id}`).then((data) => {
                     props.setSaldo(data.data.saldo)
                 })
@@ -81,13 +82,14 @@ function AddModal(props) {
                     <Modal.Title id='contained-modal-title-vcenter'>Adicionar {props.tipo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ background: '#F0F0F0' }}>
-                    <Alert variant='warning'>Digite um valor maior que zero.</Alert>
                     {errors.valor && <span style={{ color: 'red' }}>Digite um valor diferente de zero</span>}
                     <Stack direction='horizontal' gap={1}>
                         <InputGroup className='mb-3'>
                             <InputGroup.Text id='basic-addon1'>R$</InputGroup.Text>
                             <Form.Control
+                                //value={valor}
                                 // onChange={(e) => setValor(parseFloat(e.target.value))}
+                                defaultValue={0}
                                 placeholder='Valor'
                                 type='number'
                                 aria-label='Username'

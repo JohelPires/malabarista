@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function UpdateModal(props) {
     const [tipo, setTipo] = useState(props.item.id_categoria < 1000 ? 'Despesa' : 'Receita')
+    const [erro, setErro] = useState(false)
 
     const [valor, setValor] = useState(0)
     const [date, setDate] = useState(new Date().toISOString().substring(0, 10))
@@ -42,7 +43,12 @@ function UpdateModal(props) {
                 props.setReload((prev) => prev + 1)
                 props.onHide()
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err.response.data.errors[0].type)
+                if (err.response.data.errors[0].type === 'notNull Violation') {
+                    setErro(true)
+                }
+            })
     }
 
     function handleDelete() {
@@ -66,11 +72,13 @@ function UpdateModal(props) {
                 <Modal.Title id='contained-modal-title-vcenter'>Editar {tipo}</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ background: '#F0F0F0' }}>
-                <Alert variant='warning'>Digite um valor maior que zero.</Alert>
+                {novaTransacao.valor === 0 && <span style={{ color: 'red' }}>Digite um valor diferente de zero</span>}
+                {erro && <span style={{ color: 'red' }}>Digite um valor</span>}
                 <Stack direction='horizontal' gap={1}>
                     <InputGroup className='mb-3'>
                         <InputGroup.Text id='basic-addon1'>R$</InputGroup.Text>
                         <Form.Control
+                            required
                             onChange={(e) =>
                                 setNovaTransacao({
                                     ...novaTransacao,

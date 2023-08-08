@@ -23,10 +23,12 @@ async function login(req, res) {
     let usuario
     if (email) {
         usuario = await Usuario.findOne({ where: { email } })
+    } else {
+        return res.status(400).json({ erro: 'Informe um e-mail válido.' })
     }
     // console.log(usuario.id)
     if (!usuario) {
-        return res.status(404).json({ erro: 'usuario não encontrado.' })
+        return res.status(404).json({ erro: 'Usuario não encontrado.' })
     }
 
     // Verifica se a senha está correta
@@ -34,7 +36,7 @@ async function login(req, res) {
 
     if (!verificaSenha) {
         return res.status(400).json({
-            error: 'Senha incorreta!',
+            erro: 'Senha incorreta.',
         })
     }
 
