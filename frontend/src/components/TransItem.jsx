@@ -40,6 +40,16 @@ function TransItem({ item, isAuth, setReload }) {
             return cat.receitas[idcat - 1000]
         }
     }
+    function fit(text, len) {
+        if (!text) {
+            text = ''
+        }
+        if (text.length >= len) {
+            return `${text.slice(0, len)}...`
+        } else {
+            return text
+        }
+    }
 
     return (
         <>
@@ -72,7 +82,7 @@ function TransItem({ item, isAuth, setReload }) {
                 gap={2}
             >
                 <div style={{ width: '14px' }}></div>
-                <div>{item.descricao}</div>
+                <div>{fit(item.descricao, 20)}</div>
                 <h6 style={{ fontSize: '14px' }} className='m-0 ms-auto'>
                     {dias[item.dayofweek]}, dia {item.d}
                 </h6>

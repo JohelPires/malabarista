@@ -92,6 +92,7 @@ function AddModal(props) {
                                 defaultValue={0}
                                 placeholder='Valor'
                                 type='number'
+                                step={0.01}
                                 aria-label='Username'
                                 aria-describedby='basic-addon1'
                                 {...register('valor', { required: true, validate: validateNonZero })}
