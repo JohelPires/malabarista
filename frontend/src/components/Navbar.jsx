@@ -18,22 +18,15 @@ function Navbar({ isAuth, setIsAuth }) {
                 {isAuth ? (
                     <>
                         <h6 className='ms-auto'>Início</h6>
+                        <h6>Sobre</h6>
                         <DropdownButton as={ButtonGroup} size='sm' variant='success' title={isAuth.usuario.nome}>
-                            <Dropdown.Item eventKey='1'>Preferências</Dropdown.Item>
-                            <Dropdown.Item eventKey='2'>Another action</Dropdown.Item>
-                            <Dropdown.Item eventKey='3' active>
-                                Active Item
-                            </Dropdown.Item>
+                            <Dropdown.Item eventKey='1'>Configurações</Dropdown.Item>
+                            <Dropdown.Item eventKey='2'>Perfil</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item onClick={logOut} eventKey='4'>
+                            <Dropdown.Item onClick={logOut} eventKey='3'>
                                 Sair
                             </Dropdown.Item>
                         </DropdownButton>
-                        <h6>Outra tela</h6>
-
-                        <Button onClick={logOut} size='sm' variant='success'>
-                            Sair
-                        </Button>
                     </>
                 ) : (
                     <ButtonGroup className='ms-auto'>
