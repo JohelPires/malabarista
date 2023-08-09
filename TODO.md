@@ -22,7 +22,6 @@
 -   [ ] Update the documentation to include the new API endpoints.
 -   [ ] melhorar responsividade
 -   [x] função para mostrar números em formato monetário.
--   [ ] função para mostrar data em formato brasileiro
 -   [ ] categorias customizadas
 -   [ ] Documentação e 'Sobre'
 -   [ ] teclas de atalho
