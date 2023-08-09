@@ -17,7 +17,7 @@
 -   [x] Permitir editar e excluir transações. (excluir com tag deleted. não excluir do banco)
 -   [x] colocar dia da semana junto ao número do dia do mes
 -   [ ] verificar bug de ordenação de datas modificadas
--   [ ] arrumar a barra de navegação e links
+-   [ ] arrumar a barra de navegação e links (links quebrados, colocar ícones)
 -   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
 -   [ ] melhorar responsividade
@@ -34,4 +34,3 @@
 -   [ ] Algoritmos de machine learning para prever situação financeira.
 -   [ ] Calculadora de orçamento.
 -   [ ] Add support for multiple languages.
--   [ ] Implement a caching mechanism for frequently accessed data.
