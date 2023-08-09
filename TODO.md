@@ -3,7 +3,7 @@
 -   [ ] upload to heroku
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [x] ordenar lista pelo dia do mes
--   [ ] migrar o login para submit form
+-   [x] migrar o login para submit form
 -   [x] validações de formularios
     -   [x] falta o das telas de login e registrar
     -   [ ] ver videos do hook-forms e do formik yup

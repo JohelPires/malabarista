@@ -17,8 +17,8 @@ function Navbar({ isAuth, setIsAuth }) {
                 <h2>Malabaris</h2>
                 {isAuth ? (
                     <>
-                        <h6 className='ms-auto'>Início</h6>
-                        <h6>Sobre</h6>
+                        <h6 className='ms-auto mt-1'>Início</h6>
+                        <h6 className='mt-1'>Sobre</h6>
                         <DropdownButton as={ButtonGroup} size='sm' variant='success' title={isAuth.usuario.nome}>
                             <Dropdown.Item eventKey='1'>Configurações</Dropdown.Item>
                             <Dropdown.Item eventKey='2'>Perfil</Dropdown.Item>
@@ -29,14 +29,17 @@ function Navbar({ isAuth, setIsAuth }) {
                         </DropdownButton>
                     </>
                 ) : (
-                    <ButtonGroup className='ms-auto'>
-                        <Button variant='outline-light' size='sm' onClick={() => navigate('/login')}>
-                            Login
-                        </Button>
-                        <Button variant='outline-light' size='sm' onClick={() => navigate('/registrar')}>
-                            Registrar
-                        </Button>
-                    </ButtonGroup>
+                    <>
+                        <h6 className='ms-auto mt-1'>Sobre</h6>
+                        <ButtonGroup>
+                            <Button variant='outline-light' size='sm' onClick={() => navigate('/login')}>
+                                Login
+                            </Button>
+                            <Button variant='outline-light' size='sm' onClick={() => navigate('/registrar')}>
+                                Registrar
+                            </Button>
+                        </ButtonGroup>
+                    </>
                 )}
             </Stack>
         </Container>
