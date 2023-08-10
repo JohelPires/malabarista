@@ -122,7 +122,7 @@ function AddModal(props) {
                     <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
                         {/* <Form.Label>Example textarea</Form.Label> */}
                         <Form.Control
-                            value={descricao}
+                            value={descricao || ''}
                             onChange={(e) => setDescricao(e.target.value)}
                             as='textarea'
                             rows={3}
