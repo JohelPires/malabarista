@@ -33,7 +33,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                         ...item,
                         m: parseInt(date.slice(5, 7)),
                         y: parseInt(date.slice(0, 4)),
-                        d: parseInt(date.slice(9, 11)),
+                        d: parseInt(date.slice(8)),
                         dayofweek,
                         timestamp,
                     }
