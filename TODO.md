@@ -2,9 +2,9 @@
 
 -   [ ] upload to heroku
 -   [ ] Opção filtrar para a lista de transações (apenas receitas, ordem, etc)
--   [ ] de dezembro deve passar para janeiro do proximo ano e de janeiro para dezembro do ano anterior.
--   [ ] se não é o ano atual, mostrar ano
--   [ ] Adicionar ícones na interface
+-   [x] de dezembro deve passar para janeiro do proximo ano e de janeiro para dezembro do ano anterior.
+-   [ ] Um botão para ir para o mes atual.
+-   [x] Adicionar ícones na interface
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [x] ordenar lista pelo dia do mes
 -   [x] migrar o login para submit form

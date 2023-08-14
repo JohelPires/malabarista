@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Modal, Placeholder, Row, Spinner, Stack }
 import cat from '../data/categorias'
 import { money } from '../util/money'
 import AddModal from './AddModal'
+import { FaMinus, FaPlus } from 'react-icons/fa'
 
 function ControlBar({ isAuth, reload, setReload }) {
     const [valor, setValor] = useState(0.0)
@@ -85,26 +86,26 @@ function ControlBar({ isAuth, reload, setReload }) {
                 </Button> */}
                 <Button
                     variant='primary'
-                    size='sm'
+                    // size='sm'
                     onClick={() => {
                         setTipo('Receita')
                         setCategoria(1000)
                         setModalShow(true)
                     }}
                 >
-                    Adicionar receita
+                    <FaPlus /> Adicionar receita
                 </Button>
                 <Button
                     variant='warning'
                     // style={{ color: 'white' }}
-                    size='sm'
+                    // size='sm'
                     onClick={() => {
                         setTipo('Despesa')
                         setCategoria(0)
                         setModalShow(true)
                     }}
                 >
-                    Adicionar despesa
+                    <FaMinus /> Adicionar despesa
                 </Button>
                 <h5 className='ms-auto m-0'>
                     Saldo: R${' '}

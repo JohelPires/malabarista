@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, ButtonGroup, Container, Dropdown, DropdownButton, NavDropdown, Stack } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { FaUserAlt } from 'react-icons/fa'
 
 function Navbar({ isAuth, setIsAuth }) {
     const navigate = useNavigate()
@@ -17,9 +18,22 @@ function Navbar({ isAuth, setIsAuth }) {
                 <h2>Malabaris</h2>
                 {isAuth ? (
                     <>
-                        <h6 className='ms-auto mt-1'>Início</h6>
-                        <h6 className='mt-1'>Sobre</h6>
-                        <DropdownButton as={ButtonGroup} size='sm' variant='success' title={isAuth.usuario.nome}>
+                        <Link className='ms-auto' to={'/'}>
+                            <h6 className='ms-auto mt-1'>Início</h6>
+                        </Link>
+                        <Link to={'/sobre'}>
+                            <h6 className='mt-1'>Sobre</h6>
+                        </Link>
+                        <DropdownButton
+                            as={ButtonGroup}
+                            size='sm'
+                            variant='success'
+                            title={
+                                <>
+                                    <FaUserAlt className='m-1' /> {isAuth.usuario.nome}
+                                </>
+                            }
+                        >
                             <Dropdown.Item eventKey='1'>Configurações</Dropdown.Item>
                             <Dropdown.Item eventKey='2'>Perfil</Dropdown.Item>
                             <Dropdown.Divider />
