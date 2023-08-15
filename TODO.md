@@ -1,7 +1,7 @@
 # TODO List
 
 -   [ ] upload to heroku
--   [ ] Opção filtrar para a lista de transações (apenas receitas, ordem, etc)
+-   [x] Opção filtrar para a lista de transações (apenas receitas, ordem, etc)
 -   [x] de dezembro deve passar para janeiro do proximo ano e de janeiro para dezembro do ano anterior.
 -   [ ] Um botão para ir para o mes atual.
 -   [x] Adicionar ícones na interface

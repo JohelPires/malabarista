@@ -4,7 +4,16 @@ import testData from '../data/testData'
 import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
-import { FaAngleDown, FaAngleLeft, FaAngleUp, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import {
+    FaAngleDown,
+    FaAngleLeft,
+    FaAngleUp,
+    FaCheck,
+    FaCheckSquare,
+    FaChevronLeft,
+    FaChevronRight,
+    FaSquare,
+} from 'react-icons/fa'
 import { BsFilter } from 'react-icons/bs'
 
 function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
@@ -16,6 +25,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
     const [msg, setMsg] = useState('')
     const [receitas, setReceitas] = useState(true)
     const [despesas, setDespesas] = useState(true)
+    const [decrescente, setDecrescente] = useState(true)
 
     useEffect(() => {
         setMes(meses[mesAtual - 1])
@@ -53,7 +63,12 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                 if (!despesas) {
                     filteredData = filteredData.filter((item) => item.id_categoria >= 1000)
                 }
-                const sortedData = [...filteredData].sort((a, b) => b.t - a.t).sort((a, b) => b.d - a.d)
+                let sortedData
+                if (decrescente) {
+                    sortedData = [...filteredData].sort((a, b) => b.t - a.t).sort((a, b) => b.d - a.d)
+                } else {
+                    sortedData = [...filteredData].sort((a, b) => a.t - b.t).sort((a, b) => a.d - b.d)
+                }
 
                 setDadosMes(sortedData)
                 // setDadosMes(
@@ -138,7 +153,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                                     setReload((prev) => prev + 1)
                                 }}
                             >
-                                {receitas ? 'Ocultar receitas' : 'Mostrar receitas'}
+                                {receitas ? <FaCheckSquare /> : <FaSquare />} Mostrar receitas
                             </Dropdown.Item>
                             <Dropdown.Item
                                 onClick={() => {
@@ -146,7 +161,15 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                                     setReload((prev) => prev + 1)
                                 }}
                             >
-                                {despesas ? 'Ocultar despesas' : 'Mostrar despesas'}
+                                {despesas ? <FaCheckSquare /> : <FaSquare />} Mostrar despesas
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setDecrescente((prev) => !prev)
+                                    setReload((prev) => prev + 1)
+                                }}
+                            >
+                                {decrescente ? <FaCheckSquare /> : <FaSquare />} Ordem decrescente de data
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
