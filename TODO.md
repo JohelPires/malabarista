@@ -2,6 +2,7 @@
 
 -   [ ] upload to heroku
 -   [x] Opção filtrar para a lista de transações (apenas receitas, ordem, etc)
+-   [ ] Otimizar filtro para não fazer o download do banco a cada mudança
 -   [x] de dezembro deve passar para janeiro do proximo ano e de janeiro para dezembro do ano anterior.
 -   [ ] Um botão para ir para o mes atual.
 -   [x] Adicionar ícones na interface
@@ -21,7 +22,7 @@
 -   [x] Permitir editar e excluir transações. (excluir com tag deleted. não excluir do banco)
 -   [x] colocar dia da semana junto ao número do dia do mes
 -   [ ] verificar bug de ordenação de datas modificadas
--   [ ] arrumar a barra de navegação e links (links quebrados, colocar ícones)
+-   [x] arrumar a barra de navegação e links (links quebrados, colocar ícones)
 -   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
 -   [ ] melhorar responsividade
@@ -31,6 +32,17 @@
 -   [ ] teclas de atalho
 -   [x] usar o timestamp pode ser interessante pra adicionar na lista por ordem de adicionamento.
 -   [ ] fazer uma tela de bem-vindo com o botao para login / registrar
+
+## Tela de Configurações
+
+-   [ ] Mudar senha, nome do usuário
+-   [ ] Editor de categorias customizadas
+-   [ ] Excluir conta
+
+## Tela de recuperação de transações
+
+-   [ ] recuperar transação excluída
+-   [ ] esvaziar a lixeira
 
 ## Long-term Ideas
 
