@@ -75,5 +75,6 @@ a {
 }
 a:hover {
     /* color: rgb(218, 218, 218); */
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    color: rgb(87, 87, 87);
 }

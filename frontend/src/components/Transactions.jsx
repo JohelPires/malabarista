@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ButtonGroup, Container, Spinner, Stack, ToggleButton } from 'react-bootstrap'
+import { Button, ButtonGroup, Container, Dropdown, Spinner, Stack, ToggleButton } from 'react-bootstrap'
 import testData from '../data/testData'
 import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
 import { FaAngleDown, FaAngleLeft, FaAngleUp, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { BsFilter } from 'react-icons/bs'
 
 function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
     // const [data, setData] = useState(testData.transactions)
@@ -47,10 +48,10 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
 
                 let filteredData = newData.filter((item) => item.m === mesAtual).filter((item) => item.y === ano)
                 if (!receitas) {
-                    filteredData = filteredData.filter((item) => item.id_categoria >= 1000)
+                    filteredData = filteredData.filter((item) => item.id_categoria < 1000)
                 }
                 if (!despesas) {
-                    filteredData = filteredData.filter((item) => item.id_categoria < 1000)
+                    filteredData = filteredData.filter((item) => item.id_categoria >= 1000)
                 }
                 const sortedData = [...filteredData].sort((a, b) => b.t - a.t).sort((a, b) => b.d - a.d)
 
@@ -66,7 +67,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                 // setDadosMes(sortedItems)
                 setData(data.data)
                 setLoading(false)
-                setMsg('Não houve transações registradas neste mês.')
+                setMsg('Sem dados.')
             })
             .catch((err) => {
                 setMsg('Houve um erro.')
@@ -94,65 +95,61 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
         <Container className='bg-white round main-shadow'>
             <Stack className='p-3'>
                 <Stack direction='horizontal' className='transaction_month'>
+                    <Button
+                        style={{ color: '#5b5b5b' }}
+                        className='mb-2'
+                        variant='link'
+                        // size='sm'
+                        onClick={() => stepMes(-1)}
+                        // onClick={() => {
+                        //     setLoading(true)
+                        //     setMesAtual((prev) => prev - 1)
+                        // }}
+                    >
+                        <FaChevronLeft />
+                    </Button>
                     <h3>
                         {mes}, {ano}
                     </h3>
-                    <ButtonGroup className='ms-auto mb-2'>
-                        <Button
-                            variant='outline-dark'
-                            size='sm'
-                            onClick={() => stepMes(-1)}
-                            // onClick={() => {
-                            //     setLoading(true)
-                            //     setMesAtual((prev) => prev - 1)
-                            // }}
-                        >
-                            <FaChevronLeft />
-                        </Button>
-                        <Button
-                            variant='outline-dark'
-                            size='sm'
-                            onClick={() => stepMes(1)}
-                            // onClick={() => {
-                            //     setLoading(true)
-                            //     setMesAtual((prev) => prev + 1)
-                            // }}
-                        >
-                            <FaChevronRight />
-                        </Button>
-                    </ButtonGroup>
-                    <div className='m-2'></div>
-                    <ButtonGroup className='mb-2'>
-                        <ToggleButton
-                            id='toggle-receitas'
-                            type='checkbox'
-                            variant='outline'
-                            size='sm'
-                            checked={receitas}
-                            value='1'
-                            onChange={(e) => {
-                                setReceitas(e.currentTarget.checked)
-                                setReload((prev) => prev + 1)
-                            }}
-                        >
-                            <FaAngleUp />
-                        </ToggleButton>
-                        <ToggleButton
-                            id='toggle-despesas'
-                            type='checkbox'
-                            variant='outline'
-                            size='sm'
-                            checked={despesas}
-                            value='2'
-                            onChange={(e) => {
-                                setDespesas(e.currentTarget.checked)
-                                console.log(despesas)
-                                setReload((prev) => prev + 1)
-                            }}
-                        >
-                            <FaAngleDown />
-                        </ToggleButton>
-                    </ButtonGroup>
+
+                    <Button
+                        style={{ color: '#5b5b5b' }}
+                        className='mb-2'
+                        variant='link'
+                        // size='sm'
+                        onClick={() => stepMes(1)}
+                        // onClick={() => {
+                        //     setLoading(true)
+                        //     setMesAtual((prev) => prev + 1)
+                        // }}
+                    >
+                        <FaChevronRight />
+                    </Button>
+
+                    <Dropdown className='ms-auto mb-2'>
+                        <Dropdown.Toggle variant='outline' id='dropdown-basic'>
+                            <BsFilter />
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setReceitas((prev) => !prev)
+                                    setReload((prev) => prev + 1)
+                                }}
+                            >
+                                {receitas ? 'Ocultar receitas' : 'Mostrar receitas'}
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setDespesas((prev) => !prev)
+                                    setReload((prev) => prev + 1)
+                                }}
+                            >
+                                {despesas ? 'Ocultar despesas' : 'Mostrar despesas'}
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Stack>
 
                 {loading ? (
