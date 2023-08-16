@@ -23,19 +23,29 @@ function Login({ isAuth, setIsAuth }) {
 
     function handleLogin(e) {
         e.preventDefault()
-        axios
-            .post('http://localhost:5000/usuario/login', user)
-            .then((data) => {
-                if (logged) {
-                    window.localStorage.setItem('Auth', JSON.stringify(data.data))
-                    console.log('saved to localstorage')
-                }
-                setIsAuth(data.data)
-                navigate('/')
-            })
-            .catch((err) => {
-                setErro(err.response.data.erro)
-            })
+        try {
+            axios
+                .post('http://localhost:5000/usuario/login', user)
+                .then((data) => {
+                    if (logged) {
+                        window.localStorage.setItem('Auth', JSON.stringify(data.data))
+                        console.log('saved to localstorage')
+                    }
+                    setIsAuth(data.data)
+                    navigate('/')
+                })
+                .catch((err) => {
+                    if (err.response.data.erro) {
+                        // setErro(err.response.data.erro)
+                        setErro('Houve um erro.')
+                    } else {
+                        setErro('Não foi possível contactar o servidor. Tente novamente mais tarde.')
+                    }
+                })
+        } catch (error) {
+            console.log(error)
+            console.log('teste')
+        }
     }
 
     return (

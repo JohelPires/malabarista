@@ -90,6 +90,10 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
             })
     }, [reload, mesAtual])
 
+    useEffect(() => {
+        // logica de filtragem e ordenação vai ficar aqui.
+    }, [despesas, receitas, decrescente])
+
     function stepMes(step) {
         // step 1: próximo mes
         // step -1: mes anterior

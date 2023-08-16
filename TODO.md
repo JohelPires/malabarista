@@ -32,6 +32,7 @@
 -   [ ] teclas de atalho
 -   [x] usar o timestamp pode ser interessante pra adicionar na lista por ordem de adicionamento.
 -   [ ] fazer uma tela de bem-vindo com o botao para login / registrar
+-   [ ] remover os warnings do react app
 
 ## Tela de Configurações
 
