@@ -43,6 +43,7 @@ function BarStats({ dados }) {
                 } else {
                     somaDespesa += item.valor * -1
                 }
+                return null
             })
             anoReceita.push(somaReceita)
             anoDespesa.push(somaDespesa)

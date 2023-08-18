@@ -23,20 +23,22 @@
 -   [x] colocar dia da semana junto ao número do dia do mes
 -   [ ] verificar bug de ordenação de datas modificadas
 -   [x] arrumar a barra de navegação e links (links quebrados, colocar ícones)
--   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
 -   [x] melhorar responsividade
 -   [x] função para mostrar números em formato monetário.
--   [ ] categorias customizadas
 -   [ ] Documentação e 'Sobre'
 -   [ ] teclas de atalho
 -   [x] usar o timestamp pode ser interessante pra adicionar na lista por ordem de adicionamento.
 -   [ ] fazer uma tela de bem-vindo com o botao para login / registrar
--   [ ] remover os warnings do react app
+-   [x] remover os warnings do react app
+-   [ ] função money está mostrando ponto no lugar de vírgula
+-   [ ] configurações das estatísticas, recita por categoria, etc.
 
 ## Tela de Configurações
 
+-   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Mudar senha, nome do usuário
+-   [ ] categorias customizadas
 -   [ ] Editor de categorias customizadas
 -   [ ] Excluir conta
 

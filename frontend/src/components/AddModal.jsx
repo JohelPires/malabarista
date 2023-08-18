@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, Button, Dropdown, DropdownButton, Form, InputGroup, Modal, Stack } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Form, InputGroup, Modal, Stack } from 'react-bootstrap'
 import { despesas, receitas } from '../data/categorias'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 
 function AddModal(props) {
-    const [validated, setValidated] = useState(false)
+    // const [validated, setValidated] = useState(false)
 
-    const [valor, setValor] = useState(0)
+    // const [valor, setValor] = useState(0)
     const [date, setDate] = useState(new Date().toISOString().substring(0, 10))
     const [descricao, setDescricao] = useState('')
 
     const {
         register,
         handleSubmit,
-        watch,
+        // watch,
         formState: { errors },
     } = useForm()
 
@@ -31,7 +31,7 @@ function AddModal(props) {
     }
 
     const validateNonZero = (value) => {
-        if (value != 0) {
+        if (value !== 0) {
             return true
         } else {
             return 'Número deve ser diferente de zero'

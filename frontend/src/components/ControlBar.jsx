@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Placeholder, Row, Spinner, Stack } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row, Spinner, Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
 import { money } from '../util/money'
 import AddModal from './AddModal'
@@ -46,22 +46,22 @@ function ControlBar({ isAuth, reload, setReload }) {
                     setLoadingSaldo(false)
                 })
         }
-    }, [reload, modalShow])
+    }, [isAuth, reload, modalShow])
 
-    function handleChange(e) {
-        // console.log(e.target.value)
-        setValor(parseFloat(e.target.value))
-    }
+    // function handleChange(e) {
+    //     // console.log(e.target.value)
+    //     setValor(parseFloat(e.target.value))
+    // }
 
-    function handleDespesa() {
-        // console.log(cat.despesas[categ - 1])
-        setValor((prev) => prev * -1)
-        setShowCateg('DESPESA')
-    }
-    function handleReceita() {
-        // console.log(cat.receitas[categ - 1000])
-        setShowCateg('RECEITA')
-    }
+    // function handleDespesa() {
+    //     // console.log(cat.despesas[categ - 1])
+    //     setValor((prev) => prev * -1)
+    //     setShowCateg('DESPESA')
+    // }
+    // function handleReceita() {
+    //     // console.log(cat.receitas[categ - 1000])
+    //     setShowCateg('RECEITA')
+    // }
 
     function handleConfirma() {
         // console.log(valor)

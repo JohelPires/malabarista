@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ButtonGroup, Container, Dropdown, Spinner, Stack, ToggleButton } from 'react-bootstrap'
-import testData from '../data/testData'
+import { Button, Container, Dropdown, Spinner, Stack } from 'react-bootstrap'
+// import testData from '../data/testData'
 import TransItem from './TransItem'
 import axios from 'axios'
 import meses from '../data/meses'
-import {
-    FaAngleDown,
-    FaAngleLeft,
-    FaAngleUp,
-    FaCheck,
-    FaCheckSquare,
-    FaChevronLeft,
-    FaChevronRight,
-    FaSquare,
-} from 'react-icons/fa'
+import { FaCheckSquare, FaChevronLeft, FaChevronRight, FaSquare } from 'react-icons/fa'
 import { BsFilter } from 'react-icons/bs'
 
 function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMes, mesAtual, setMesAtual }) {
@@ -42,7 +33,7 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                     // const timestamp = new Date(item.createdAt)
                     const timestamp = new Date(item.createdAt)
                     const dayofweek = new Date(item.data).getDay()
-                    const t = timestamp.getTime()
+                    // const t = timestamp.getTime()
 
                     const date = item.data || item.createdAt
 

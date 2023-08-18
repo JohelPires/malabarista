@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, Container, Row, Stack } from 'react-bootstrap'
+import { Stack } from 'react-bootstrap'
 import cat from '../data/categorias'
 import { money } from '../util/money'
 import UpdateModal from './UpdateModal'

@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, Button, Dropdown, DropdownButton, Form, InputGroup, Modal, Stack } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Form, InputGroup, Modal, Stack } from 'react-bootstrap'
 import { despesas, receitas } from '../data/categorias'
 import axios from 'axios'
 
 function UpdateModal(props) {
-    const [tipo, setTipo] = useState(props.item.id_categoria < 1000 ? 'Despesa' : 'Receita')
+    const tipo = props.item.id_categoria < 1000 ? 'Despesa' : 'Receita'
     const [erro, setErro] = useState(false)
-
-    const [valor, setValor] = useState(0)
-    const [date, setDate] = useState(new Date().toISOString().substring(0, 10))
-    const [descricao, setDescricao] = useState('')
 
     const [novaTransacao, setNovaTransacao] = useState({
         valor: props.item.valor,
