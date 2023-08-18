@@ -4,7 +4,7 @@
 -   [x] Opção filtrar para a lista de transações (apenas receitas, ordem, etc)
 -   [ ] Otimizar filtro para não fazer o download do banco a cada mudança
 -   [x] de dezembro deve passar para janeiro do proximo ano e de janeiro para dezembro do ano anterior.
--   [ ] Um botão para ir para o mes atual.
+-   [x] Um botão para ir para o mes atual.
 -   [x] Adicionar ícones na interface
 -   [x] saldo deve ser fornecido por um endpoint que retorna SUM de transações.
 -   [x] ordenar lista pelo dia do mes

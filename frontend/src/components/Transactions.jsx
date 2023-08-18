@@ -97,17 +97,26 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
     function stepMes(step) {
         // step 1: próximo mes
         // step -1: mes anterior
+        // step 0: vai para o mes atual
 
-        setLoading(true)
-        let proxMes = mesAtual + step
-        if (proxMes > 12) {
-            proxMes = 1
-            setAno((prev) => prev + 1)
-        } else if (proxMes < 1) {
-            proxMes = 12
-            setAno((prev) => prev - 1)
+        if (step === 0) {
+            const getmes = new Date().getMonth() + 1
+            if (mesAtual != getmes) {
+                setLoading(true)
+                setMesAtual(getmes)
+            }
+        } else {
+            setLoading(true)
+            let proxMes = mesAtual + step
+            if (proxMes > 12) {
+                proxMes = 1
+                setAno((prev) => prev + 1)
+            } else if (proxMes < 1) {
+                proxMes = 12
+                setAno((prev) => prev - 1)
+            }
+            setMesAtual(proxMes)
         }
-        setMesAtual(proxMes)
     }
 
     return (
@@ -127,9 +136,15 @@ function Transactions({ isAuth, reload, setReload, setData, setDadosMes, dadosMe
                     >
                         <FaChevronLeft />
                     </Button>
-                    <h3>
-                        {mes}, {ano}
-                    </h3>
+                    <Button
+                        onClick={() => stepMes(0)}
+                        variant='link'
+                        style={{ color: '#5b5b5b', textDecoration: 'none' }}
+                    >
+                        <h3>
+                            {mes}, {ano}
+                        </h3>
+                    </Button>
 
                     <Button
                         style={{ color: '#5b5b5b' }}
