@@ -15,13 +15,15 @@ function Navbar({ isAuth, setIsAuth }) {
     return (
         <Container className='pt-3 pb-3'>
             <Stack gap={3} direction='horizontal'>
-                <h2>Malabaris</h2>
                 {isAuth ? (
                     <>
-                        <Link className='ms-auto' to={'/'}>
-                            <h6 className='ms-auto mt-1'>Início</h6>
+                        <Link to={'/'}>
+                            <h2>Malabaris</h2>
                         </Link>
-                        <Link to={'/sobre'}>
+                        {/* <Link className='ms-auto' to={'/'}>
+                            <h6 className='ms-auto mt-1'>Início</h6>
+                        </Link> */}
+                        <Link className='ms-auto' to={'/sobre'}>
                             <h6 className='mt-1'>Sobre</h6>
                         </Link>
                         <DropdownButton
@@ -44,6 +46,7 @@ function Navbar({ isAuth, setIsAuth }) {
                     </>
                 ) : (
                     <>
+                        <h2>Malabaris</h2>
                         <h6 className='ms-auto mt-1'>Sobre</h6>
                         <ButtonGroup>
                             <Button variant='outline-light' size='sm' onClick={() => navigate('/login')}>

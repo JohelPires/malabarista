@@ -13,10 +13,24 @@ function ControlBar({ isAuth, reload, setReload }) {
     const [saldo, setSaldo] = useState(0)
     const [modalShow, setModalShow] = useState(false)
     const [categoria, setCategoria] = useState(0)
+    const [isSmallScreen, setIsSmallScreen] = useState(false)
 
     const [loadingSaldo, setLoadingSaldo] = useState(true)
 
     const [tipo, setTipo] = useState('')
+
+    function checkScreenSize() {
+        if (window.innerWidth < 768) {
+            setIsSmallScreen(true)
+        } else {
+            setIsSmallScreen(false)
+        }
+    }
+
+    useEffect(() => {
+        checkScreenSize()
+        window.addEventListener('resize', checkScreenSize)
+    }, [])
 
     useEffect(() => {
         setLoadingSaldo(true)
@@ -93,7 +107,7 @@ function ControlBar({ isAuth, reload, setReload }) {
                         setModalShow(true)
                     }}
                 >
-                    <FaPlus /> Adicionar receita
+                    <FaPlus /> {!isSmallScreen && 'Adicionar receita'}
                 </Button>
                 <Button
                     variant='warning'
@@ -105,7 +119,7 @@ function ControlBar({ isAuth, reload, setReload }) {
                         setModalShow(true)
                     }}
                 >
-                    <FaMinus /> Adicionar despesa
+                    <FaMinus /> {!isSmallScreen && 'Adicionar despesa'}
                 </Button>
                 <h5 className='ms-auto m-0'>
                     Saldo: R${' '}

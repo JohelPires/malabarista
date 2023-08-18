@@ -25,7 +25,7 @@
 -   [x] arrumar a barra de navegação e links (links quebrados, colocar ícones)
 -   [ ] Nas configurações do usuário é possível listar, excluir ou recuperar transações marcadas com deleted
 -   [ ] Update the documentation to include the new API endpoints.
--   [ ] melhorar responsividade
+-   [x] melhorar responsividade
 -   [x] função para mostrar números em formato monetário.
 -   [ ] categorias customizadas
 -   [ ] Documentação e 'Sobre'
@@ -47,6 +47,7 @@
 
 ## Long-term Ideas
 
+-   [ ] Personalização, fundo, modo escuro, etc
 -   [ ] importar extrato do banco
 -   [ ] Algoritmos de machine learning para prever situação financeira.
 -   [ ] Calculadora de orçamento.
